@@ -87,5 +87,5 @@ source $ZSH/oh-my-zsh.sh
 
 alias gg='gvim --remote-silent'
 
-unset SSH_ASKPASS
 setxkbmap -option "caps:escape"
+unset SSH_ASKPASS
