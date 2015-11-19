@@ -90,17 +90,29 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace9 "9 "
+set $workspace10 "10 ♬"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -148,7 +160,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # colors 
-# 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
@@ -156,7 +167,6 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 # window colors
-#                       border              background         text                 indicator
 client.focused          $bg-color           $bg-color          $text-color          #ff00ff
 client.unfocused        $iancative-bg-color $inactive-bg-color $inactive-text-color #ff00ff
 client.focused_inactive $iancative-bg-color $inactive-bg-color $inactive-text-color #ff00ff
@@ -179,30 +189,38 @@ bar {
     }
 }
 
+# sticky window
+bindsym $mod+Shift+s sticky toggle
+
+# floating
+for_window [class="Pavucontrol"] floating enable
+
+# default workspaces
+assign [class="Rhythmbox"] $workspace10
+assign [class="Chromium-browser"] $workspace1
+
 # Lock the screen
-#
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 
-# Pulse Audio controls
-#
+# key-bindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 1 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 1 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-mute 1 toggle # mute sound
-
-# Media player controls
-#
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
-
-# Cycle through Workspaces
-#
+bindsym $mod+Shift+f exec chromium-browser
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
+#bindsym Print exec screenshot
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 
-# Set Background
-#
-exec_always feh --bg-scale ~/.wallpaper.jpg
+# startup
+exec_always feh --bg-scale ~/.wallpaper.jpg # set background
+#exec_always --no-startup-id xrandr --output HDMI-0 --off --output DVI-I-1 --off --output DVI-I-0 --off --output DVI-I-3 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+exec --no-startup-id rhythmbox
 
-# 3rd pary compositor for Trancparancy and Fade (-f)
-#
-exec compton -f
+# keys
+exec_always xmodmap -e "clear lock" # disable caps lock
+exec_always xmodmap -e "keysym Caps_Lock = Escape" # map caps_lock to esc
+
+exec compton -f # compositor for transparancy and fading
