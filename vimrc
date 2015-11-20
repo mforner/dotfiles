@@ -31,6 +31,8 @@ Plugin 'gerw/vim-latex-suite'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kana/vim-operator-user'
+Plugin 'scrooloose/nerdtree'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -152,8 +154,8 @@ if has("mac")
   let g:main_font = "Anonymous\\ Pro:h16"
   let g:small_font = "Anonymous\\ Pro:h2"
 else
-  let g:main_font = "Monospace\\ 11"
-  let g:small_font = "Monospace\\ 2"
+  let g:main_font = "DejaVu\\ Sans\\ Mono\\ Book\\ 11"
+  let g:small_font = "DejaVu\\ Sans\\ Mono\\ Book\\ 2"
 endif
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -294,7 +296,4 @@ nmap <silent> <Leader>oj :FSBelow<cr>
 nmap <silent> <Leader>oJ :FSSplitBelow<cr>   
 " ENDE 
 
-set guifont=
 finish 
-" this modeline tells vim to enable folding {{{1
-" vim: fdm=marker 
