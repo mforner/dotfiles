@@ -32,6 +32,8 @@ Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kana/vim-operator-user'
 
+Plugin 'bling/vim-airline'
+
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype plugin indent on " required
@@ -152,8 +154,8 @@ if has("mac")
   let g:main_font = "Anonymous\\ Pro:h16"
   let g:small_font = "Anonymous\\ Pro:h2"
 else
-  let g:main_font = "Monospace\\ 11"
-  let g:small_font = "Monospace\\ 2"
+  let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
+  let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
 endif
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -196,12 +198,6 @@ set ignorecase
 set hlsearch
 " line numbers
 set number
-" cursor position in status-line
-set ruler
-" command in status-line
-set showcmd
-" alwas display status line
-set laststatus=2
 " don't update the display while executing macros
 set lazyredraw
 " At least let yourself know what mode you're in
@@ -210,8 +206,6 @@ set showmode
 set nowrap
 " set size of command-line history
 set history=100
-" Set the status line the way I like it
-set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
 " Allow backspacing over autoindent, linebreaks, start of insertion
 set backspace=2
 " use / instead of \ (only needed under Windows)
@@ -232,6 +226,14 @@ set complete=.,w,b,u,t,i
 " gui
 set guioptions=acg
 
+" cursor position in status-line
+"set ruler
+" command in status-line
+"set showcmd
+" alwas display status line
+"set laststatus=2
+" Set the status line the way I like it
+"set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
 
 " setup printing 
 " ==============
@@ -294,7 +296,8 @@ nmap <silent> <Leader>oj :FSBelow<cr>
 nmap <silent> <Leader>oJ :FSSplitBelow<cr>   
 " ENDE 
 
-set guifont=
+let g:airline_powerline_fonts = 1
+
 finish 
 " this modeline tells vim to enable folding {{{1
 " vim: fdm=marker 
