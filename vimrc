@@ -32,10 +32,12 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'kana/vim-operator-user'
 Plugin 'scrooloose/nerdtree'
 
+Plugin 'majutsushi/tagbar'
 
 Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
+
 call vundle#end() " required
 filetype plugin indent on " required
 " ==========================================================
@@ -298,5 +300,6 @@ nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 " ENDE 
 
 let g:airline_powerline_fonts = 1
+nmap <F8> :TagbarToggle<CR>
 
 finish 
