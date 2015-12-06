@@ -1,4 +1,3 @@
-
 " ===Pluglins===============================================
 set nocompatible
 filetype off
@@ -31,6 +30,9 @@ Plugin 'vim-scripts/Align'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kana/vim-operator-user'
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'majutsushi/tagbar'
 
 Plugin 'bling/vim-airline'
 
@@ -38,6 +40,7 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'tpope/vim-abolish' 
 Plugin 'nathanaelkane/vim-indent-guides'
 " All of your Plugins must be added before the following line
+
 call vundle#end() " required
 filetype plugin indent on " required
 " ==========================================================
@@ -122,7 +125,7 @@ if has("mac")
   let g:main_font = "Anonymous\\ Pro:h16"
   let g:small_font = "Anonymous\\ Pro:h2"
 else
-  let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
+  let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 11"
   let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
 endif
 "-----------------------------------------------------------------------------
@@ -266,7 +269,6 @@ xmap > ]
 " ENDE 
 
 let g:airline_powerline_fonts = 1
+nmap <F8> :TagbarToggle<CR>
 
 finish 
-" this modeline tells vim to enable folding {{{1
-" vim: fdm=marker 
