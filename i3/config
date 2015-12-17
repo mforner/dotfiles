@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1    
+set $mod Mod4    
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -34,17 +34,17 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+Semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -53,10 +53,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+Colon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -65,10 +65,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+u split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+u split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -90,8 +90,7 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-
-set $workspace1 "1 "
+set $workspace1 "1 "
 set $workspace2 "2 "
 set $workspace3 "3 "
 set $workspace4 "4 "
@@ -115,16 +114,16 @@ bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -172,13 +171,14 @@ client.unfocused        $iancative-bg-color $inactive-bg-color $inactive-text-co
 client.focused_inactive $iancative-bg-color $inactive-bg-color $inactive-text-color #ff00ff
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #ff00ff
 
-hide_edge_borders both
+#hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     #status_command i3status
-    status_command i3blocks -c ~/.i3/i3blocks.conf
+    status_command SCRIPT_DIR=/usr/lib/i3blocks i3blocks -c ~/.i3/i3blocks.conf
+     
     colors {
         background $bg-color
         separator #757575
@@ -197,7 +197,7 @@ for_window [class="Pavucontrol"] floating enable
 
 # default workspaces
 assign [class="Rhythmbox"] $workspace10
-assign [class="Chromium-browser"] $workspace1
+assign [class="Firefox"] $workspace1
 
 # Lock the screen
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
@@ -206,13 +206,13 @@ bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 1 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 1 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-mute 1 toggle # mute sound
-bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl pause
-bindsym $mod+Shift+f exec chromium-browser
+bindsym $mod+Shift+f exec firefox
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 #bindsym Print exec screenshot
-#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 
 # startup
 exec_always feh --bg-scale ~/.wallpaper.jpg # set background
@@ -224,3 +224,5 @@ exec_always xmodmap -e "clear lock" # disable caps lock
 exec_always xmodmap -e "keysym Caps_Lock = Escape" # map caps_lock to esc
 
 exec compton -f # compositor for transparancy and fading
+exec --no-startup-id dropbox-cli start
+#exec --no-startup-id nm-applet

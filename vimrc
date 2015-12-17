@@ -35,6 +35,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 
 Plugin 'bling/vim-airline'
+Plugin 'Raimondi/delimitMate'
+"Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 
@@ -301,5 +303,10 @@ nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 let g:airline_powerline_fonts = 1
 nmap <F8> :TagbarToggle<CR>
+nmap <F9> :NERDTreeToggle<CR>
 
+"nmap <silent> <Leader>qä :cn<cr>   
+"nmap <silent> <Leader>qö :cp<cr>   
+         
+set t_Co=256
 finish 
