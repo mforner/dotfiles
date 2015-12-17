@@ -19,13 +19,13 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rhysd/vim-clang-format'
 
+
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/Align'
-Plugin 'gerw/vim-latex-suite'
 
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kien/ctrlp.vim'
@@ -38,6 +38,9 @@ Plugin 'bling/vim-airline'
 Plugin 'Raimondi/delimitMate'
 "Plugin 'ervandew/supertab'
 
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'tpope/vim-abolish' 
+Plugin 'nathanaelkane/vim-indent-guides'
 " All of your Plugins must be added before the following line
 
 call vundle#end() " required
@@ -98,47 +101,12 @@ set hidden
 " Let's make it easy to edit this file (mnemonic for the key sequence is
 " 'e'dit 'v'imrc)
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
-
 " And to source this file as well (mnemonic for the key sequence is
 " 's'ource 'v'imrc)
 nmap <leader>sv :so $MYVIMRC<cr>
-
 " source buffer
 nmap <leader>ss :so %<cr>
 
-" *,# and vimgerp (gv) search for Visual selection
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction 
-
-
-" From an idea by Michael Naumann
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-"Basically you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-vnoremap <silent> gv :call VisualSearch('gv')<CR>
- 
 " change directory to the directory containing the file in the buffer
 nmap  <leader>cd :lcd %:h
 
@@ -147,12 +115,12 @@ nmap  <leader>cd :lcd %:h
 " zw add word as not spelled correctly (remove from dictionary)
 nmap <leader>s :setlocal spell! spelllang=en_us,de<cr>
 
-" quickfix
+" open quickfix
 nmap <leader>q :copen<cr>
 nmap <leader>qq :cclose<cr>
-" commands 
+" commands
 " write as using sudo
-command! W w !sudo tee % > /dev/null 
+command! W w !sudo tee % > /dev/null
 
 " customization 
 if has("mac")
@@ -273,32 +241,33 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 map <C-K> <Plug>(operator-clang-format)
              
+" other file - FSwitch
 " Switch to the file and load it into the current window
 nmap <silent> <Leader>of :FSHere<cr>
-
 " Switch to the file and load it into the window on the right
 nmap <silent> <Leader>ol :FSRight<cr>
-
 " Switch to the file and load it into a new window split on the right
 nmap <silent> <Leader>oL :FSSplitRight<cr>
-
 " Switch to the file and load it into the window on the left
 nmap <silent> <Leader>oh :FSLeft<cr>
-
 " Switch to the file and load it into a new window split on the left
 nmap <silent> <Leader>oH :FSSplitLeft<cr>
-
 " Switch to the file and load it into the window above
 nmap <silent> <Leader>ok :FSAbove<cr>
-
 " Switch to the file and load it into a new window split above
 nmap <silent> <Leader>oK :FSSplitAbove<cr>
-
 " Switch to the file and load it into the window below
 nmap <silent> <Leader>oj :FSBelow<cr>
-
 " Switch to the file and load it into a new window split below
 nmap <silent> <Leader>oJ :FSSplitBelow<cr>   
+
+" unimaired remaps suggested for non-us-keyboards
+nmap < [
+nmap > ]
+omap < [
+omap > ]
+xmap < [
+xmap > ]
 " ENDE 
 
 let g:airline_powerline_fonts = 1
