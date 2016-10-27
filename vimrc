@@ -7,7 +7,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'vim-scripts/twilight256.vim'
+Plugin 'flazz/vim-colorschemes'
+
 
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-sensible'
@@ -15,8 +18,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'rdnetto/YCM-Generator'
 Plugin 'rhysd/vim-clang-format'
 
 
@@ -37,8 +40,16 @@ Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-airline'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'tpope/vim-abolish' 
+Plugin 'tpope/vim-abolish'
 Plugin 'nathanaelkane/vim-indent-guides'
+
+Plugin 'rust-lang/rust.vim'
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-scripts/gnuplot.vim'
+Plugin 'wgurecky/vimSum'
+
 " All of your Plugins must be added before the following line
 
 call vundle#end() " required
@@ -51,7 +62,7 @@ vnoremap <c-e> ,
 
 set exrc
 set secure
- 
+
 "let g:ycm_key_list_select_completion=[]
 "let g:ycm_key_list_previous_completion=[]
 let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
@@ -120,7 +131,7 @@ nmap <leader>qq :cclose<cr>
 " write as using sudo
 command! W w !sudo tee % > /dev/null
 
-" customization 
+" customization
 if has("mac")
   let g:main_font = "Anonymous\\ Pro:h16"
   let g:small_font = "Anonymous\\ Pro:h2"
@@ -134,7 +145,7 @@ endif
 if has("gui_running")
   exe "set guifont=" . g:main_font
   set background=dark
-  colorscheme solarized
+  colorscheme twilight
   if !exists("g:vimrcloaded")
       winpos 0 0
       if !&diff
@@ -155,7 +166,7 @@ set wildmenu
 set wrapscan
 " mark text-to-be-changed by $ sign
 set cpoptions+=ces$
-" set the height of the command-line 
+" set the height of the command-line
 set ch=2
 " make insertion possible beyond the end of a line
 set virtualedit=all
@@ -206,7 +217,7 @@ set guioptions=acg
 " Set the status line the way I like it
 "set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
 
-" setup printing 
+" setup printing
 " ==============
 " some printing options
 set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
@@ -238,7 +249,7 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 map <C-K> <Plug>(operator-clang-format)
-             
+
 " other file - FSwitch
 " Switch to the file and load it into the current window
 nmap <silent> <Leader>of :FSHere<cr>
@@ -257,7 +268,7 @@ nmap <silent> <Leader>oK :FSSplitAbove<cr>
 " Switch to the file and load it into the window below
 nmap <silent> <Leader>oj :FSBelow<cr>
 " Switch to the file and load it into a new window split below
-nmap <silent> <Leader>oJ :FSSplitBelow<cr>   
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 " unimaired remaps suggested for non-us-keyboards
 nmap < [
@@ -266,9 +277,17 @@ omap < [
 omap > ]
 xmap < [
 xmap > ]
-" ENDE 
+" ENDE
 
 let g:airline_powerline_fonts = 1
 nmap <F8> :TagbarToggle<CR>
 
-finish 
+nmap <F12> :NERDTreeToggle<CR>
+nnoremap <F5> :make<CR>
+
+set makeprg=compileThesis
+
+iabbrev udn und
+
+
+finish
