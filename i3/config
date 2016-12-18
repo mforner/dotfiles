@@ -196,7 +196,7 @@ bindsym $mod+Shift+s sticky toggle
 for_window [class="Pavucontrol"] floating enable
 
 # default workspaces
-assign [class="Rhythmbox"] $workspace10
+assign [class="Spotify"] $workspace10
 assign [class="Firefox"] $workspace1
 
 # Lock the screen
@@ -217,7 +217,7 @@ bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opaci
 # startup
 exec_always feh --bg-scale ~/.wallpaper.jpg # set background
 #exec_always --no-startup-id xrandr --output HDMI-0 --off --output DVI-I-1 --off --output DVI-I-0 --off --output DVI-I-3 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-2 --mode 1920x1080 --pos 1920x0 --rotate normal
-exec --no-startup-id rhythmbox
+exec --no-startup-id spotify
 
 # keys
 exec_always xmodmap -e "clear lock" # disable caps lock

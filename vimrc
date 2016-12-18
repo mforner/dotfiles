@@ -35,7 +35,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 
 Plugin 'bling/vim-airline'
-Plugin 'Raimondi/delimitMate'
+"Plugin 'Raimondi/delimitMate'
 "Plugin 'ervandew/supertab'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -276,6 +276,9 @@ nmap <F9> :NERDTreeToggle<CR>
 
 "nmap <silent> <Leader>qä :cn<cr>   
 "nmap <silent> <Leader>qö :cp<cr>   
-         
+
+"if s:extfname ==? "tex"
+  "let g:LatexBox_split_type="new"
+"endif         
 set t_Co=256
 finish 
