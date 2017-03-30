@@ -10,6 +10,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 
 
+Plugin 'vim-scripts/a.vim'
+
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-repeat'

@@ -50,13 +50,22 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git gitignore zsh-syntax-highlighting history-substring-search emacs)
+plugins=(git gitignore zsh-syntax-highlighting history-substring-search)
 
 # User configuration
 
-export PATH="/bin:/home/forner/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/forner/npm-global/bin"
+export PATH="$PATH:/bin"
+export PATH="$PATH:/home/forner/bin"
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/bin"
+export PATH="$PATH:/usr/bin/site_perl"
+export PATH="$PATH:/usr/bin/vendor_perl"
+export PATH="$PATH:/usr/bin/core_perl"
+export PATH
+
 #export PATH="/home/forner/npm-global/bin:$Path"
-# export MANPATH="/usr/local/man:$MANPATH"
+#export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,3 +100,13 @@ alias gg='gvim --remote-silent'
 
 setxkbmap -option "caps:escape"
 unset SSH_ASKPASS
+
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"          # $EDITOR should open in terminal
+export VISUAL="emacsclient -c -a emacs" # $VISUAL opens in GUI with non-daemon as alternate
+
+alias emax="emacsclient -t"             # used to be "emacs -nw"
+alias semac="sudo emacsclient -t"       # used to be "sudo emacs -nw"
+alias emacsc="emacsclient -c -a emacs"  # new - opens the GUI with alternate non-daemon
+
+
