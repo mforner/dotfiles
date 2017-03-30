@@ -100,4 +100,6 @@ alias gg='gvim --remote-silent'
 
 setxkbmap -option "caps:escape"
 unset SSH_ASKPASS
-
+setopt HIST_IGNORE_SPACE
+export VISUAL=gvim
+export EDITOR="$VISUAL"

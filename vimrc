@@ -1,4 +1,3 @@
-" ===Pluglins===============================================
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -172,6 +171,7 @@ let g:airline_powerline_fonts = 1
 " Tagbar Plugin
 " =============
 nmap <F8> :TagbarToggle<CR>
+nmap <F9> :NERDTreeToggle<CR>
 
 " NerdTree Plugin
 " ===============
