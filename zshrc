@@ -55,7 +55,7 @@ plugins=(git gitignore zsh-syntax-highlighting history-substring-search)
 # User configuration
 
 export PATH="$PATH:/bin"
-export PATH="$PATH:/home/forner/bin"
+export PATH="$PATH:/home/forner/root/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/bin"
