@@ -6,23 +6,25 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'        " package manager
 Plugin 'flazz/vim-colorschemes'   " colorschemes
-Plugin 'vim-scripts/a.vim'        " alternate files
 Plugin 'tpope/vim-surround'       " modify surrounding parentheses etc
 Plugin 'tpope/vim-sensible'       " some sensible defaults
 Plugin 'tpope/vim-repeat'         " make . work with surround
 Plugin 'tpope/vim-fugitive'       " git commands
-Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
-Plugin 'tpope/vim-abolish'        " abbreviations
-Plugin 'rhysd/vim-clang-format'   " format c/c++
-Plugin 'SirVer/ultisnips'         " snippets TAB
 Plugin 'scrooloose/nerdcommenter' " <leader>cc
 Plugin 'kien/ctrlp.vim'           " fuzzy search
 Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
-Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'pangloss/vim-javascript'
 
-Plugin 'vim-latex/vim-latex'
+
+"Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+"Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
+"Plugin 'tpope/vim-abolish'        " abbreviations
+"Plugin 'rhysd/vim-clang-format'   " format c/c++
+"Plugin 'SirVer/ultisnips'         " snippets TAB
+"Plugin 'vim-scripts/a.vim'        " alternate files
+"Plugin 'vim-latex/vim-latex'
 
 
 " All of your Plugins must be added before the following line
@@ -232,9 +234,9 @@ set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 
 " run line through shell
-noremap Q !!$SHELL<CR>
+"noremap Q !!$SHELL<CR>
 "
 " Hit <alt-v> in : mode, copy last line into command buffer
-cnoremap <M-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')
+"cnoremap <M-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')
 
 "finish
