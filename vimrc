@@ -17,14 +17,14 @@ Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 Plugin 'pangloss/vim-javascript'
 
+Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'rhysd/vim-clang-format'   " format c/c++
+Plugin 'vim-scripts/a.vim'        " alternate files
 
-"Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+"Plugin 'SirVer/ultisnips'         " snippets TAB
+"
 "Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 "Plugin 'tpope/vim-abolish'        " abbreviations
-"Plugin 'rhysd/vim-clang-format'   " format c/c++
-"Plugin 'SirVer/ultisnips'         " snippets TAB
-"Plugin 'vim-scripts/a.vim'        " alternate files
-"Plugin 'vim-latex/vim-latex'
 
 
 " All of your Plugins must be added before the following line
@@ -48,9 +48,9 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
@@ -98,7 +98,7 @@ set ignorecase
 set hlsearch
 
 "" line numbers
-"set number
+set number
 
 "" don't update the display while executing macros
 set lazyredraw
@@ -154,12 +154,12 @@ endfunction
 " CLANG FORMAT PLUGIN:
 
 let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AccessModifierOffset" : -2,
+            \ "AllowShortIfStatementsOnASingleLine" : "false",
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11",
             \ "BreakConstructorInitializersBeforeComma" : "true",
-            \ "BreakBeforeBraces" : "Stroustrup"}
+            \ "BreakBeforeBraces" : "GNU"}
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
@@ -188,33 +188,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "let g:UltiSnipsEditSplit="vertical"
 "nnoremap <F5> :make<CR>
 "set makeprg=compileThesis
-
-
-
-" VIM_LATEX:
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-filetype plugin on
-
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex can
-" be called correctly.
-set shellslash
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: This enables automatic indentation as you type.
-filetype indent on
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-filetype plugin on
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
-
 
 iabbrev udn und
 
