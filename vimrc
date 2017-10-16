@@ -16,17 +16,15 @@ Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 Plugin 'pangloss/vim-javascript'
+Plugin 'vim-scripts/a.vim'        " alternate files
 
-
-"Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'rhysd/vim-clang-format'   " format c/c++
+Plugin 'SirVer/ultisnips'         " snippets TAB
+Plugin 'honza/vim-snippets'
+"Plugin 'vim-latex/vim-latex'
 "Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 "Plugin 'tpope/vim-abolish'        " abbreviations
-"Plugin 'rhysd/vim-clang-format'   " format c/c++
-"Plugin 'SirVer/ultisnips'         " snippets TAB
-"Plugin 'vim-scripts/a.vim'        " alternate files
-"Plugin 'vim-latex/vim-latex'
-
-
 " All of your Plugins must be added before the following line
 
 call vundle#end() " required
@@ -53,8 +51,17 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+let g:ctrlp_custom_ignore = {
+ \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+ \ 'file': '\v\.(exe|so|dll)$',
+ \ 'link': 'some_bad_symbolic_links',
+ \ }
+
+
+
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
 let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
+
 if has("gui_running")
     exe "set guifont=" . g:main_font
     set background=dark
@@ -184,8 +191,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "" If you want :UltiSnipsEdit to split your window.
-
 "let g:UltiSnipsEditSplit="vertical"
+
 "nnoremap <F5> :make<CR>
 "set makeprg=compileThesis
 
