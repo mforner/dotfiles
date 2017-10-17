@@ -9,20 +9,21 @@ Plugin 'flazz/vim-colorschemes'   " colorschemes
 Plugin 'tpope/vim-surround'       " modify surrounding parentheses etc
 Plugin 'tpope/vim-sensible'       " some sensible defaults
 Plugin 'tpope/vim-repeat'         " make . work with surround
-Plugin 'tpope/vim-fugitive'       " git commands
 Plugin 'scrooloose/nerdcommenter' " <leader>cc
 Plugin 'kien/ctrlp.vim'           " fuzzy search
 Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
-Plugin 'pangloss/vim-javascript'
 
+Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'rhysd/vim-clang-format'   " format c/c++
 
-"Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
+Plugin 'SirVer/ultisnips'         " snippets TAB
+
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'tpope/vim-fugitive'       " git commands
 "Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 "Plugin 'tpope/vim-abolish'        " abbreviations
-"Plugin 'rhysd/vim-clang-format'   " format c/c++
-"Plugin 'SirVer/ultisnips'         " snippets TAB
 "Plugin 'vim-scripts/a.vim'        " alternate files
 "Plugin 'vim-latex/vim-latex'
 
@@ -47,10 +48,10 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 " 's'ource 'v'imrc
 nmap <leader>sv :source $MYVIMRC<cr>
 
-" Tabstops are 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" Tabstops are 2 spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
@@ -154,12 +155,14 @@ endfunction
 " CLANG FORMAT PLUGIN:
 
 let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
+            \ "UseTab": "Never",
+            \ "AccessModifierOffset" : -2,
             \ "AllowShortIfStatementsOnASingleLine" : "true",
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11",
             \ "BreakConstructorInitializersBeforeComma" : "true",
-            \ "BreakBeforeBraces" : "Stroustrup"}
+            \ "BreakBeforeBraces" : "Allman",
+            \ "AllowShortBlocksOnASingleLine"  : "false"}
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
