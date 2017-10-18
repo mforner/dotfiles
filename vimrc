@@ -17,25 +17,21 @@ Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 
 Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
 Plugin 'rhysd/vim-clang-format'   " format c/c++
+Plugin 'tpope/vim-dispatch'
 
+Plugin 'vim-scripts/a.vim'        " alternate files, <leader>ih
 
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'tpope/vim-fugitive'       " git commands
-"Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
+Plugin 'SirVer/ultisnips'         " snippets TAB
+Plugin 'honza/vim-snippets'
+
 "Plugin 'tpope/vim-abolish'        " abbreviations
-"Plugin 'vim-scripts/a.vim'        " alternate files
-"Plugin 'vim-latex/vim-latex'
-Plugin 'vim-scripts/a.vim'        " alternate files
-
-"Plugin 'SirVer/ultisnips'         " snippets TAB
-"
+"Plugin 'tpope/vim-fugitive'       " git commands
 "Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 "Plugin 'tpope/vim-abolish'        " abbreviations
 
 
 " All of your Plugins must be added before the following line
-
-call vundle#end() " required
+call vundle#end()         " required
 filetype plugin indent on " required
 
 "use , as leader instead of \
@@ -166,8 +162,28 @@ let g:clang_format#style_options = {
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11",
             \ "BreakConstructorInitializersBeforeComma" : "true",
-            \ "BreakBeforeBraces" : "GNU",
-            \ "AllowShortBlocksOnASingleLine"  : "false"}
+            \ "BreakBeforeBraces" : "Allman",
+            \ "AllowShortBlocksOnASingleLine"  : "false" }
+
+
+
+"  \ "BraceWrapping" : {
+"  \      "AfterControlStatement" : "false",
+"  \      "AfterClass " : "false",
+"  \      "AfterEnum"   : "false",
+"  \      "AfterFunction" : "true", 
+"  \      "AfterNameSpace" : "false",
+"  \      "AfterStruct" : "false", 
+"  \      "AfterUnion" : "false", 
+"  \      "AfterExternBlock" : "false", 
+"  \      "BeforeCatch" : "false", 
+"  \      "BeforeElse" : "false", 
+"  \      "IndentBraces" : "false", 
+"  \      "SplitEmptyFunction" : "false", 
+"  \      "SplitEmptyRecord" : "false", 
+"  \      "SplitEmptyNamespace" : "false"
+"  \ },
+"  \ "AlwaysBreakAfterReturnType" : "RTBS_TopLevel",
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
@@ -194,20 +210,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "" If you want :UltiSnipsEdit to split your window.
 
 "let g:UltiSnipsEditSplit="vertical"
-"nnoremap <F5> :make<CR>
-"set makeprg=compileThesis
+"
+nnoremap <F5> :make<CR>
+set makeprg=make
 
 iabbrev udn und
 
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
-
-inoremap <Up> <nop>
-inoremap <Down> <nop>
-inoremap <Left> <nop>
-inoremap <Right> <nop>
+"noremap <Up> <nop>
+"noremap <Down> <nop>
+"noremap <Left> <nop>
+"noremap <Right> <nop>
+"
+"inoremap <Up> <nop>
+"inoremap <Down> <nop>
+"inoremap <Left> <nop>
+"inoremap <Right> <nop>
 
 set undofile                " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
