@@ -155,35 +155,78 @@ endfunction
 
 " CLANG FORMAT PLUGIN:
 
+" \ "SplitEmptyFunctions" : "true",
+" \ "SplitEmptyRecord" : "false",
+" \ "SplitEmptyNamespace" : "false",
+" \},
+
 let g:clang_format#style_options = {
-            \ "UseTab": "Never",
-            \ "AccessModifierOffset" : -2,
-            \ "AllowShortIfStatementsOnASingleLine" : "false",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "BreakConstructorInitializersBeforeComma" : "true",
-            \ "BreakBeforeBraces" : "Allman",
-            \ "AllowShortBlocksOnASingleLine"  : "false" }
+            \ "AccessModifierOffset"                           : -2,
+            \ "AlignAfterOpenBracket"                          : "Align",
+            \ "AlignConsecutiveAssignments"                    : "true",
+            \ "AlignConsecutiveDeclarations"                   : "true",
+            \ "AlignOperands"                                  : "true",
+            \ "AlignTrailingComments"                          : "true",
+            \ "AllowAllParametersOfDeclarationOnNextLine"      : "true",
+            \ "AllowShortBlocksOnASingleLine"                  : "false",
+            \ "AllowShortCaseLabelsOnASingleLine"              : "false",
+            \ "AllowShortFunctionsOnASingleLine"               : "None",
+            \ "AllowShortIfStatementsOnASingleLine"            : "false",
+            \ "AllowShortLoopsOnASingleLine"                   : "false",
+            \ "AlwaysBreakAfterReturnType"                     : "All",
+            \ "AlwaysBreakBeforeMultilineStrings"              : "false",
+            \ "AlwaysBreakTemplateDeclarations"                : "true",
+            \ "BinPackArguments"                               : "false",
+            \ "BinPackParameters"                              : "false",
+            \ "BreakBeforeBinaryOperators"                     : "NonAssignment",
+            \ "BreakBeforeBraces"                              : "Custom",
+            \ "BraceWrapping"                                  : {
+                       \ "AfterClass"            : "false" ,
+                       \ "AfterControlStatement" : "false",
+                       \ "AfterEnum"             : "true",
+                       \ "AfterFunction"         : "true",
+                       \ "AfterNamespace"        : "false",
+                       \ "AfterStruct"           : "false",
+                       \ "AfterUnion"            : "false",
+                       \ "BeforeCatch"           : "true",
+                       \ "BeforeElse"            : "false",
+                       \ "IndentBraces"          : "false",
+            \},
+            \ "BreakBeforeTernaryOperators"                    : "false",
+            \ "ColumnLimit"                                    : 80,
+            \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "false",
+            \ "ConstructorInitializerIndentWidth"              : 2,
+            \ "ContinuationIndentWidth"                        : 2,
+            \ "Cpp11BracedListStyle"                           : "false",
+            \ "DerivePointerAlignment"                         : "false",
+            \ "DisableFormat"                                  : "false",
+            \ "ExperimentalAutoDetectBinPacking"               : "false",
+            \ "IndentCaseLabels"                               : "false",
+            \ "IndentWidth"                                    : 2,
+            \ "IndentWrappedFunctionNames"                     : "false",
+            \ "KeepEmptyLinesAtTheStartOfBlocks"               : "true",
+            \ "Language"                                       : "Cpp",
+            \ "MaxEmptyLinesToKeep"                            : 1,
+            \ "NamespaceIndentation"                           : "None",
+            \ "PointerAlignment"                               : "Left",
+            \ "ReflowComments"                                 : "false",
+            \ "SortIncludes"                                   : "false",
+            \ "SpaceAfterCStyleCast"                           : "true",
+            \ "SpaceBeforeAssignmentOperators"                 : "true",
+            \ "SpaceBeforeParens"                              : "ControlStatements",
+            \ "SpaceInEmptyParentheses"                        : "false",
+            \ "SpacesBeforeTrailingComments"                   : 3,
+            \ "SpacesInAngles"                                 : "false",
+            \ "SpacesInCStyleCastParentheses"                  : "false",
+            \ "SpacesInParentheses"                            : "false",
+            \ "SpacesInSquareBrackets"                         : "false",
+            \ "Standard"                                       : "Cpp03",
+            \ "UseTab"                                         : "Never",
+\}
 
 
-
-"  \ "BraceWrapping" : {
-"  \      "AfterControlStatement" : "false",
-"  \      "AfterClass " : "false",
-"  \      "AfterEnum"   : "false",
-"  \      "AfterFunction" : "true", 
-"  \      "AfterNameSpace" : "false",
-"  \      "AfterStruct" : "false", 
-"  \      "AfterUnion" : "false", 
-"  \      "AfterExternBlock" : "false", 
-"  \      "BeforeCatch" : "false", 
-"  \      "BeforeElse" : "false", 
-"  \      "IndentBraces" : "false", 
-"  \      "SplitEmptyFunction" : "false", 
-"  \      "SplitEmptyRecord" : "false", 
-"  \      "SplitEmptyNamespace" : "false"
-"  \ },
-"  \ "AlwaysBreakAfterReturnType" : "RTBS_TopLevel",
+let g:ctrlp_root_markers = ['.ctrlp']
+nnoremap <leader>. :CtrlPTag<cr>
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
@@ -215,16 +258,6 @@ nnoremap <F5> :make<CR>
 set makeprg=make
 
 iabbrev udn und
-
-"noremap <Up> <nop>
-"noremap <Down> <nop>
-"noremap <Left> <nop>
-"noremap <Right> <nop>
-"
-"inoremap <Up> <nop>
-"inoremap <Down> <nop>
-"inoremap <Left> <nop>
-"inoremap <Right> <nop>
 
 set undofile                " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
