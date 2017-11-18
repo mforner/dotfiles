@@ -16,18 +16,28 @@ Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 
 Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
-Plugin 'rhysd/vim-clang-format'   " format c/c++
 Plugin 'tpope/vim-dispatch'
 
 Plugin 'vim-scripts/a.vim'        " alternate files, <leader>ih
 
-Plugin 'SirVer/ultisnips'         " snippets TAB
+" :python3 makes python2 plugins unusable
+"Plugin 'SirVer/ultisnips'         " snippets TAB
+
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+
+Plugin 'rhysd/vim-clang-format'
+
+
+Plugin 'majutsushi/tagbar'
 
 "Plugin 'tpope/vim-abolish'        " abbreviations
 "Plugin 'tpope/vim-fugitive'       " git commands
-"Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
-"Plugin 'tpope/vim-abolish'        " abbreviations
+Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
+
+Plugin 'craigemery/vim-autotag'
 
 
 " All of your Plugins must be added before the following line
@@ -40,8 +50,108 @@ let mapleader=","
 "last c-f, c-t etc in reverse order map to <c-e>
 nnoremap <c-e> ,
 
+"Language:        Cpp
+let g:clang_format#style_options = {
+      \ "AccessModifierOffset" : -2,
+      \ "AlignAfterOpenBracket" : "Acvign",
+      \ "AlignConsecutiveAssignments" : "true",
+      \ "AlignConsecutiveDeclarations" : "true",
+      \ "AlignEscapedNewlinesLeft" : "true",
+      \ "AlignOperands" :   "true",
+      \ "AlignTrailingComments" : "true",
+      \ "AllowAllParametersOfDeclarationOnNextLine" : "true",
+      \ "AllowShortBlocksOnASingleLine" : "false",
+      \ "AllowShortCaseLabelsOnASingleLine" : "true",
+      \ "AllowShortFunctionsOnASingleLine" : "Empty",
+      \ "AllowShortIfStatementsOnASingleLine" : "false",
+      \ "AllowShortLoopsOnASingleLine" : "false",
+\ "AlwaysBreakAfterReturnType": "All",
+      \ "AlwaysBreakBeforeMultilineStrings" : "false",
+\ "AlwaysBreakTemplateDeclarations" : "true",
+\ "BinPackArguments" : "true",
+      \ "BinPackParameters" : "true",
+      \ "BraceWrapping" :   {
+      \ "AfterClass" :      "false",
+      \ "AfterControlStatement" : "false",
+      \ "AfterEnum" :       "false",
+      \ "AfterFunction" :   "true",
+      \ "AfterNamespace" :  "false",
+      \ "AfterObjCDeclaration" : "false",
+      \ "AfterStruct" :     "false",
+      \ "AfterUnion" :      "false",
+      \ "BeforeCatch" :     "true",
+      \ "BeforeElse" :      "false",
+      \ "IndentBraces" :    "false",
+      \  },
+      \ "BreakBeforeBinaryOperators" : "NonAssignment",
+      \ "BreakBeforeBraces" : "Custom",
+      \ "BreakBeforeTernaryOperators" : "false",
+\ "BreakConstructorInitializersBeforeComma" : "flase",
+      \ "ColumnLimit" :     80,
+      \ "CommentPragmas" :  '^ IWYU pragma:',
+      \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
+      \ "ConstructorInitializerIndentWidth" : 2,
+      \ "ContinuationIndentWidth" : 2,
+      \ "Cpp11BracedListStyle" : "false",
+      \ "DerivePointerAlignment" : "false",
+      \ "DisableFormat" :   "false",
+      \ "ExperimentalAutoDetectBinPacking" : "false",
+      \ "ForEachMacros":   [ 'foreach', 'Q_FOREACH', 'BOOST_FOREACH' ],
+      \ "IndentCaseLabels" : "false",
+      \ "IndentWidth" :     2,
+      \ "IndentWrappedFunctionNames" : "false",
+      \ "KeepEmptyLinesAtTheStartOfBlocks" : "true",
+      \ "MacroBlockBegin" : '',
+      \ "MacroBlockEnd" :   '',
+      \ "MaxEmptyLinesToKeep" : 1,
+      \ "NamespaceIndentation" : "None",
+      \ "ObjCBlockIndentWidth" : 2,
+      \ "ObjCSpaceAfterProperty" : "false",
+      \ "ObjCSpaceBeforeProtocolList" : "true",
+      \ "PenaltyBreakBeforeFirstCallParameter" : 19,
+      \ "PenaltyBreakComment" : 300,
+      \ "PenaltyBreakFirstLessLess" : 120,
+      \ "PenaltyBreakString" : 1000,
+      \ "PenaltyExcessCharacter" : 1000000,
+      \ "PenaltyReturnTypeOnItsOwnLine" : 60,
+      \ "PointerAlignment" : "Left",
+      \ "ReflowComments" :  "true",
+      \ "SortIncludes" :    "true",
+      \ "SpaceAfterCStyleCast" : "false",
+      \ "SpaceBeforeAssignmentOperators" : "true",
+      \ "SpaceBeforeParens" : "ControlStatements",
+      \ "SpaceInEmptyParentheses" : "false",
+      \ "SpacesBeforeTrailingComments" : 1,
+      \ "SpacesInAngles" :  "false",
+      \ "SpacesInContainerLiterals" : "true",
+      \ "SpacesInCStyleCastParentheses" : "false",
+      \ "SpacesInParentheses" : "false",
+      \ "SpacesInSquareBrackets" : "false",
+      \ "Standard" :        "Cpp03",
+      \ "TabWidth" :        2,
+      \ "UseTab" :          "Never",
+      \ }
+
+""IncludeCategories": 
+"- Regex:           '^<.*\.h>'
+"Priority:        1
+"- Regex:           '^<.*'
+    "Priority:        2
+  "- Regex:           '.*'
+    "Priority:        3
+
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+
+
 " gui
 set guioptions=acg
+
+nmap <silent> <leader>of :A<cr>
 
 " Let's make it easy to edit this file (mnemonic for the key sequence is
 " 'e'dit 'v'imrc)
@@ -58,14 +168,14 @@ set expandtab
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
 let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
 if has("gui_running")
-    exe "set guifont=" . g:main_font
-    set background=dark
-    colorscheme twilight
-    if !exists("g:vimrcloaded")
-        winpos 0 0
-        winsize 130 120
-        let g:vimrcloaded = 1
-    endif
+  exe "set guifont=" . g:main_font
+  set background=dark
+  colorscheme twilight
+  if !exists("g:vimrcloaded")
+    winpos 0 0
+    winsize 130 120
+    let g:vimrcloaded = 1
+  endif
 endif
 
 " allow buffers to go to background w/out saving etc.
@@ -153,89 +263,14 @@ function! PrintFile(fname)
   return v:shell_error
 endfunction
 
-" CLANG FORMAT PLUGIN:
-
-" \ "SplitEmptyFunctions" : "true",
-" \ "SplitEmptyRecord" : "false",
-" \ "SplitEmptyNamespace" : "false",
-" \},
-
-let g:clang_format#style_options = {
-            \ "AccessModifierOffset"                           : -2,
-            \ "AlignAfterOpenBracket"                          : "Align",
-            \ "AlignConsecutiveAssignments"                    : "true",
-            \ "AlignConsecutiveDeclarations"                   : "true",
-            \ "AlignOperands"                                  : "true",
-            \ "AlignTrailingComments"                          : "true",
-            \ "AllowAllParametersOfDeclarationOnNextLine"      : "true",
-            \ "AllowShortBlocksOnASingleLine"                  : "false",
-            \ "AllowShortCaseLabelsOnASingleLine"              : "false",
-            \ "AllowShortFunctionsOnASingleLine"               : "None",
-            \ "AllowShortIfStatementsOnASingleLine"            : "false",
-            \ "AllowShortLoopsOnASingleLine"                   : "false",
-            \ "AlwaysBreakAfterReturnType"                     : "All",
-            \ "AlwaysBreakBeforeMultilineStrings"              : "false",
-            \ "AlwaysBreakTemplateDeclarations"                : "true",
-            \ "BinPackArguments"                               : "false",
-            \ "BinPackParameters"                              : "false",
-            \ "BreakBeforeBinaryOperators"                     : "NonAssignment",
-            \ "BreakBeforeBraces"                              : "Custom",
-            \ "BraceWrapping"                                  : {
-                       \ "AfterClass"            : "false" ,
-                       \ "AfterControlStatement" : "false",
-                       \ "AfterEnum"             : "true",
-                       \ "AfterFunction"         : "true",
-                       \ "AfterNamespace"        : "false",
-                       \ "AfterStruct"           : "false",
-                       \ "AfterUnion"            : "false",
-                       \ "BeforeCatch"           : "true",
-                       \ "BeforeElse"            : "false",
-                       \ "IndentBraces"          : "false",
-            \},
-            \ "BreakBeforeTernaryOperators"                    : "false",
-            \ "ColumnLimit"                                    : 80,
-            \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "false",
-            \ "ConstructorInitializerIndentWidth"              : 2,
-            \ "ContinuationIndentWidth"                        : 2,
-            \ "Cpp11BracedListStyle"                           : "false",
-            \ "DerivePointerAlignment"                         : "false",
-            \ "DisableFormat"                                  : "false",
-            \ "ExperimentalAutoDetectBinPacking"               : "false",
-            \ "IndentCaseLabels"                               : "false",
-            \ "IndentWidth"                                    : 2,
-            \ "IndentWrappedFunctionNames"                     : "false",
-            \ "KeepEmptyLinesAtTheStartOfBlocks"               : "true",
-            \ "Language"                                       : "Cpp",
-            \ "MaxEmptyLinesToKeep"                            : 1,
-            \ "NamespaceIndentation"                           : "None",
-            \ "PointerAlignment"                               : "Left",
-            \ "ReflowComments"                                 : "false",
-            \ "SortIncludes"                                   : "false",
-            \ "SpaceAfterCStyleCast"                           : "true",
-            \ "SpaceBeforeAssignmentOperators"                 : "true",
-            \ "SpaceBeforeParens"                              : "ControlStatements",
-            \ "SpaceInEmptyParentheses"                        : "false",
-            \ "SpacesBeforeTrailingComments"                   : 3,
-            \ "SpacesInAngles"                                 : "false",
-            \ "SpacesInCStyleCastParentheses"                  : "false",
-            \ "SpacesInParentheses"                            : "false",
-            \ "SpacesInSquareBrackets"                         : "false",
-            \ "Standard"                                       : "Cpp03",
-            \ "UseTab"                                         : "Never",
-\}
-
-
 let g:ctrlp_root_markers = ['.ctrlp']
+let g:ctrlp_custom_ignore = 'CMakeFiles, ariag25root'
+
+" Ignore some folders and files for CtrlP indexing
+
 nnoremap <leader>. :CtrlPTag<cr>
 
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-" if you install vim-operator-user
-autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-" Toggle auto formatting:
-"nmap <Leader>C :ClangFormatAutoToggle<CR>
-map <C-K> <Plug>(operator-clang-format)
+
 
 " AIRLINE PLUGIN:
 
@@ -244,25 +279,28 @@ let g:airline_powerline_fonts = 1
 " NERDTREE PLUGIN:
 
 nmap <F12> :NERDTreeToggle<CR>
+nmap <F8> :Tagbar<CR>
 
 " ULTISNIPS:
 
-let g:UltiSnipsExpandTrigger="<tab>"
+le g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "" If you want :UltiSnipsEdit to split your window.
 
 "let g:UltiSnipsEditSplit="vertical"
 "
-nnoremap <F5> :make<CR>
-set makeprg=make
+nnoremap <F5> :Make<CR>
+nnoremap <F7> :Make!<CR>
+set makeprg=cd\ ~/projekte/unity-a2/bincore;\ make\ -j8;\ cd\ -
 
 iabbrev udn und
 
-set undofile                " Save undo's after file closes
+set undofile
+" Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
+set undolevels=1000 " How many undos
+set undoreload=10000 " number of lines to save for undo
 
 " run line through shell
 "noremap Q !!$SHELL<CR>
