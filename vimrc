@@ -21,12 +21,17 @@ Plugin 'tpope/vim-dispatch'
 
 Plugin 'vim-scripts/a.vim'        " alternate files, <leader>ih
 
-Plugin 'SirVer/ultisnips'         " snippets TAB
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 "Plugin 'tpope/vim-abolish'        " abbreviations
 "Plugin 'tpope/vim-fugitive'       " git commands
-"Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
+Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
+
+Plugin      'craigemery/vim-autotag'
 "Plugin 'tpope/vim-abolish'        " abbreviations
 
 
@@ -227,6 +232,8 @@ let g:clang_format#style_options = {
 
 let g:ctrlp_root_markers = ['.ctrlp']
 nnoremap <leader>. :CtrlPTag<cr>
+
+nmap <silent><leader>of :A<cr>
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
