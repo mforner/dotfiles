@@ -29,6 +29,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 Plugin 'rhysd/vim-clang-format'
+Plugin 'jceb/vim-orgmode'
+
 
 
 Plugin 'majutsushi/tagbar'
@@ -38,7 +40,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 
 Plugin 'craigemery/vim-autotag'
-
+Plugin 'tell-k/vim-autopep8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         " required
@@ -50,25 +52,27 @@ let mapleader=","
 "last c-f, c-t etc in reverse order map to <c-e>
 nnoremap <c-e> ,
 
-"Language:        Cpp
+"     \ "AlwaysBreakAfterReturnType": "All",
+
 let g:clang_format#style_options = {
+      \ "Language" : "C",
       \ "AccessModifierOffset" : -2,
-      \ "AlignAfterOpenBracket" : "Acvign",
+      \ "AlignAfterOpenBracket" : "Align",
       \ "AlignConsecutiveAssignments" : "true",
       \ "AlignConsecutiveDeclarations" : "true",
       \ "AlignEscapedNewlinesLeft" : "true",
       \ "AlignOperands" :   "true",
       \ "AlignTrailingComments" : "true",
-      \ "AllowAllParametersOfDeclarationOnNextLine" : "true",
+      \ "AllowAllParametersOfDeclarationOnNextLine" : "false",
       \ "AllowShortBlocksOnASingleLine" : "false",
-      \ "AllowShortCaseLabelsOnASingleLine" : "true",
+      \ "AllowShortCaseLabelsOnASingleLine" : "false",
       \ "AllowShortFunctionsOnASingleLine" : "Empty",
       \ "AllowShortIfStatementsOnASingleLine" : "false",
       \ "AllowShortLoopsOnASingleLine" : "false",
-\ "AlwaysBreakAfterReturnType": "All",
+      \ "AlwaysBreakAfterReturnType" : "All",
       \ "AlwaysBreakBeforeMultilineStrings" : "false",
-\ "AlwaysBreakTemplateDeclarations" : "true",
-\ "BinPackArguments" : "true",
+      \ "AlwaysBreakTemplateDeclarations" : "true",
+      \ "BinPackArguments" : "true",
       \ "BinPackParameters" : "true",
       \ "BraceWrapping" :   {
       \ "AfterClass" :      "false",
@@ -86,9 +90,8 @@ let g:clang_format#style_options = {
       \ "BreakBeforeBinaryOperators" : "NonAssignment",
       \ "BreakBeforeBraces" : "Custom",
       \ "BreakBeforeTernaryOperators" : "false",
-\ "BreakConstructorInitializersBeforeComma" : "flase",
       \ "ColumnLimit" :     80,
-      \ "CommentPragmas" :  '^ IWYU pragma:',
+      \ "BreakConstructorInitializersBeforeComma" : "true",
       \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
       \ "ConstructorInitializerIndentWidth" : 2,
       \ "ContinuationIndentWidth" : 2,
@@ -96,49 +99,52 @@ let g:clang_format#style_options = {
       \ "DerivePointerAlignment" : "false",
       \ "DisableFormat" :   "false",
       \ "ExperimentalAutoDetectBinPacking" : "false",
-      \ "ForEachMacros":   [ 'foreach', 'Q_FOREACH', 'BOOST_FOREACH' ],
       \ "IndentCaseLabels" : "false",
       \ "IndentWidth" :     2,
       \ "IndentWrappedFunctionNames" : "false",
       \ "KeepEmptyLinesAtTheStartOfBlocks" : "true",
-      \ "MacroBlockBegin" : '',
-      \ "MacroBlockEnd" :   '',
       \ "MaxEmptyLinesToKeep" : 1,
       \ "NamespaceIndentation" : "None",
       \ "ObjCBlockIndentWidth" : 2,
       \ "ObjCSpaceAfterProperty" : "false",
       \ "ObjCSpaceBeforeProtocolList" : "true",
-      \ "PenaltyBreakBeforeFirstCallParameter" : 19,
+      \ "PenaltyBreakBeforeFirstCallParameter" : 1000000,
       \ "PenaltyBreakComment" : 300,
       \ "PenaltyBreakFirstLessLess" : 120,
       \ "PenaltyBreakString" : 1000,
       \ "PenaltyExcessCharacter" : 1000000,
       \ "PenaltyReturnTypeOnItsOwnLine" : 60,
       \ "PointerAlignment" : "Left",
-      \ "ReflowComments" :  "true",
+      \ "ReflowComments" :  "false",
       \ "SortIncludes" :    "true",
       \ "SpaceAfterCStyleCast" : "false",
       \ "SpaceBeforeAssignmentOperators" : "true",
       \ "SpaceBeforeParens" : "ControlStatements",
-      \ "SpaceInEmptyParentheses" : "false",
       \ "SpacesBeforeTrailingComments" : 1,
       \ "SpacesInAngles" :  "false",
       \ "SpacesInContainerLiterals" : "true",
       \ "SpacesInCStyleCastParentheses" : "false",
       \ "SpacesInParentheses" : "false",
+      \ "SpaceInEmptyParentheses" : "false",
       \ "SpacesInSquareBrackets" : "false",
       \ "Standard" :        "Cpp03",
       \ "TabWidth" :        2,
       \ "UseTab" :          "Never",
       \ }
+"\ }
 
+
+"\ "MacroBlockBegin" : '',
+"\ "MacroBlockEnd" :   '',
+"\ "ForEachMacros":   [ 'foreach', 'Q_FOREACH', 'BOOST_FOREACH' ],
+"\ "CommentPragmas" :  '^ IWYU pragma:',
 ""IncludeCategories": 
 "- Regex:           '^<.*\.h>'
 "Priority:        1
 "- Regex:           '^<.*'
-    "Priority:        2
-  "- Regex:           '.*'
-    "Priority:        3
+"Priority:        2
+"- Regex:           '.*'
+"Priority:        3
 
 
 " map to <Leader>cf in C++ code
@@ -244,8 +250,12 @@ set listchars=tab:>-,trail:~
 set list
 
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-let &colorcolumn=join(range(81),",")
-let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn=join(range(91),",")
+let &colorcolumn="90,".join(range(120,999),",")
+
+set sw=4
+set tw=90
+
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
@@ -270,10 +280,7 @@ let g:ctrlp_custom_ignore = 'CMakeFiles, ariag25root'
 
 nnoremap <leader>. :CtrlPTag<cr>
 
-
-
 " AIRLINE PLUGIN:
-
 let g:airline_powerline_fonts = 1
 
 " NERDTREE PLUGIN:
@@ -281,18 +288,19 @@ let g:airline_powerline_fonts = 1
 nmap <F12> :NERDTreeToggle<CR>
 nmap <F8> :Tagbar<CR>
 
-" ULTISNIPS:
+function! SimcomUnittest()
+    :!cd ~/projekte/simcom && python -m unittest discover; cd - > /dev/null
+endfunction
 
-le g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"" If you want :UltiSnipsEdit to split your window.
+nnoremap <F5> :call SimcomUnittest()<CR>
+nnoremap <F6> :Make<CR>
+nnoremap <F7> :!rsync -rzog --chown=www-data:www-data --safe-links --exclude='*swp' ~/projekte/cwd/unity-a2/www root@master975:/var<CR>
 
-"let g:UltiSnipsEditSplit="vertical"
-"
-nnoremap <F5> :Make<CR>
-nnoremap <F7> :Make!<CR>
-set makeprg=cd\ ~/projekte/unity-a2/bincore;\ make\ -j8;\ cd\ -
+"nnoremap <F7> :Make!<CR>
+
+"set makeprg=cd\ ~/projekte/unity-a2/bincore;\ make\ -j8;\ cd\ -
+set makeprg=rsync\ -rz\ --exclude=\'*.swp\'\ --exclude=\'test_*\'\ --exclude=\'*.pyc\'\ ~/projekte/simcom/\ root@master975:~/sbin/
+"set makeprg=rsync\ -rz\ --exclude=\'*.swp\'\ --exclude=\'test_*\'\ --exclude=\'*.pyc\'\ ~/projekte/simcom/\ root@master1009.:~/sbin/
 
 iabbrev udn und
 
