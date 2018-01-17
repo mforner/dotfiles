@@ -38,7 +38,8 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-syntastic/syntastic'
-
+  
+Plugin '2072/PHP-Indenting-for-VIm'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         " required
@@ -60,10 +61,17 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 2 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set textwidth=80
+
+autocmd FileType c,cpp,objc,js,php set tabstop=2
+autocmd FileType c,cpp,objc,js,php set shiftwidth=2
+autocmd FileType c,cpp,objc,js,php set softtabstop=2
+autocmd FileType c,cpp,objc,js,php set textwidth=80
+
+autocmd FileType py set tabstop=4
+autocmd FileType py set shiftwidth=4
+autocmd FileType py set softtabstop=4
+autocmd FileType py set textwidth=80
+
 set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
