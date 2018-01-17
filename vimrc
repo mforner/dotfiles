@@ -54,6 +54,8 @@ nnoremap <c-e> ,
 " gui
 set guioptions=acg
 
+set ff=unix
+
 " Let's make it easy to edit this file (mnemonic for the key sequence is
 " 'e'dit 'v'imrc)
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
@@ -62,15 +64,15 @@ nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 2 spaces
 
-autocmd FileType c,cpp,objc,js,php set tabstop=2
-autocmd FileType c,cpp,objc,js,php set shiftwidth=2
-autocmd FileType c,cpp,objc,js,php set softtabstop=2
-autocmd FileType c,cpp,objc,js,php set textwidth=80
+autocmd FileType c,cpp,objc,javascript,php set tabstop=2
+autocmd FileType c,cpp,objc,javascript,php set shiftwidth=2
+autocmd FileType c,cpp,objc,javascript,php set softtabstop=2
+autocmd FileType c,cpp,objc,javascript,php set textwidth=80
 
-autocmd FileType py set tabstop=4
-autocmd FileType py set shiftwidth=4
-autocmd FileType py set softtabstop=4
-autocmd FileType py set textwidth=80
+autocmd FileType python set tabstop=4
+autocmd FileType python set shiftwidth=4
+autocmd FileType python set softtabstop=4
+autocmd FileType python set textwidth=80
 
 set expandtab
 
