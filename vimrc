@@ -65,9 +65,9 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 2 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
@@ -287,8 +287,8 @@ nmap <F8> :Tagbar<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings:
 "
-nnoremap <F5> :Make<CR>
-set makeprg=cd\ ~/projekte/cwd/simcom;\ install.sh;\ cd\ -
+nnoremap <F5> :Make!<CR>
+set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;./install.sh;cd\ -
 
 
 "finish
