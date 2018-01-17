@@ -5,7 +5,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'        " package manager
-Plugin 'flazz/vim-colorschemes'   " colorschemes
+
 Plugin 'tpope/vim-surround'       " modify surrounding parentheses etc
 Plugin 'tpope/vim-sensible'       " some sensible defaults
 Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
@@ -14,6 +14,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 
 Plugin 'scrooloose/nerdtree'      " fileexplorer
+Plugin 'flazz/vim-colorschemes'   " colorschemes
 Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
@@ -35,14 +36,8 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'tell-k/vim-autopep8'
 
 Plugin 'Vimjas/vim-python-pep8-indent'
-
-
 Plugin 'majutsushi/tagbar'
-
 Plugin 'vim-syntastic/syntastic'
-
-"Plugin 'tpope/vim-fugitive'       " git commands
-"Plugin 'tpope/vim-abolish'        " abbreviations
 
 
 " All of your Plugins must be added before the following line
@@ -154,9 +149,14 @@ let &colorcolumn=join(range(81),",")
 let &colorcolumn="80,".join(range(120,999),",")
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
+set undofile
+" Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories
+set undolevels=1000 " How many undos
+set undoreload=10000 " number of lines to save for undo
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PRINTING:
-
 " some printing options
 set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
 " set the print-command
@@ -169,12 +169,16 @@ function! PrintFile(fname)
   return v:shell_error
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CLANG FORMAT PLUGIN:
-
-" \ "SplitEmptyFunctions" : "true",
-" \ "SplitEmptyRecord" : "false",
-" \ "SplitEmptyNamespace" : "false",
-" \},
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+"nmap <Leader>C :ClangFormatAutoToggle<CR>
+map <C-K> <Plug>(operator-clang-format)
 
 let g:clang_format#style_options = {
      \ "AccessModifierOffset"                            : -2,
@@ -241,51 +245,22 @@ let g:clang_format#style_options = {
 \}
 
 
-let g:ctrlp_root_markers = ['.ctrlp']
-let g:ctrlp_custom_ignore = 'CMakeFiles'
-nnoremap <leader>. :CtrlPTag<cr>
-
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-" if you install vim-operator-user
-autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-" Toggle auto formatting:
-"nmap <Leader>C :ClangFormatAutoToggle<CR>
-map <C-K> <Plug>(operator-clang-format)
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AIRLINE PLUGIN:
-
 let g:airline_powerline_fonts = 1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE PLUGIN:
-
 nmap <F12> :NERDTreeToggle<CR>
 
-" ULTISNIPS:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TAGBAR PLUGIN:
+nmap <F8> : Tagbar<CR>
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"" If you want :UltiSnipsEdit to split your window.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAKE command
+nnoremap <F5> :Make!<CR>
+set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;\ ./install.sh;\ cd\ -
 
-"let g:UltiSnipsEditSplit="vertical"
-"
-nnoremap <F5> :Make<CR>
-set makeprg=cd\ ~/projekte/unity-a2/bincore;\ make;\ cd\ -
-
-iabbrev udn und
-
-set undofile
-" Save undo's after file closes
-set undodir=$HOME/.vim/undo " where to save undo histories
-set undolevels=1000 " How many undos
-set undoreload=10000 " number of lines to save for undo
-
-" run line through shell
-"noremap Q !!$SHELL<CR>
-"
-" Hit <alt-v> in : mode, copy last line into command buffer
-"cnoremap <M-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')
 
 "finish
