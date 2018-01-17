@@ -33,12 +33,13 @@ Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-
 Plugin 'Matt-Deacalion/vim-systemd-syntax'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'tell-k/vim-autopep8'
 
 Plugin 'pangloss/vim-javascript'
+
+Plugin '2072/PHP-Indenting-for-VIm'
 
 Plugin 'garbas/vim-snipmate'
 Plugin 'tomtom/tlib_vim.git'
@@ -284,11 +285,14 @@ nmap <F12> :NERDTreeToggle<CR>
 " TAGBAR PLUGIN:
 nmap <F8> :Tagbar<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SYNTASTIC PLUGIN
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings:
-"
+" F-TASTEN MAPPINGS:
 nnoremap <F5> :Make!<CR>
 set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;./install.sh;cd\ -
+
 
 
 "finish
