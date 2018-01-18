@@ -14,8 +14,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-eunuch'
-
-
 Plugin 'tpope/vim-projectionist'
 Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'flazz/vim-colorschemes'   " colorschemes
@@ -43,10 +41,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-syntastic/syntastic'
 
 Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'kien/ctrlp.vim'
+
+
 
 Plugin 'mileszs/ack.vim'
 
-Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         " required
@@ -71,15 +71,15 @@ nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 2 spaces
 
-autocmd FileType c,cpp,objc,javascript,php set tabstop=2
-autocmd FileType c,cpp,objc,javascript,php set shiftwidth=2
-autocmd FileType c,cpp,objc,javascript,php set softtabstop=2
-autocmd FileType c,cpp,objc,javascript,php set textwidth=80
+autocmd FileType c,cpp,objc,javascript set tabstop=2
+autocmd FileType c,cpp,objc,javascript set shiftwidth=2
+autocmd FileType c,cpp,objc,javascript set softtabstop=2
+autocmd FileType c,cpp,objc,javascript set textwidth=80
 
-autocmd FileType python set tabstop=4
-autocmd FileType python set shiftwidth=4
-autocmd FileType python set softtabstop=4
-autocmd FileType python set textwidth=80
+autocmd FileType python,php set tabstop=4
+autocmd FileType python,php set shiftwidth=4
+autocmd FileType python,php set softtabstop=4
+autocmd FileType python,php set textwidth=80
 
 set expandtab
 
@@ -279,8 +279,13 @@ nmap <F12> :NERDTreeToggle<cr>
 nmap <F8> : Tagbar<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAKE COMMAND:
-nnoremap <F5> :Make!<cr>
+" ACK PLUGIN
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAKE command
+nnoremap <F5> :Make!<CR>
 set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;\ ./install.sh;\ cd\ -
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
