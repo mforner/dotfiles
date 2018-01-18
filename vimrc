@@ -12,7 +12,11 @@ Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 Plugin 'tpope/vim-repeat'         " make . work with surround
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-eunuch'
 
+
+Plugin 'tpope/vim-projectionist'
 Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'flazz/vim-colorschemes'   " colorschemes
 Plugin 'bling/vim-airline'        " colorfull status bar
@@ -21,7 +25,6 @@ Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
 Plugin 'rhysd/vim-clang-format'   " format c/c++
 
 Plugin 'tpope/vim-abolish'        " abbreviations
-Plugin 'vim-scripts/a.vim'        " alternate files, <leader>ih
 
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -38,8 +41,12 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-syntastic/syntastic'
-  
+
 Plugin '2072/PHP-Indenting-for-VIm'
+
+Plugin 'mileszs/ack.vim'
+
+Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         " required
@@ -89,11 +96,9 @@ if has("gui_running")
     endif
 endif
 
+
 " allow buffers to go to background w/out saving etc.
 set hidden
-
-" write as using sudo
-command! W w !sudo tee % > /dev/null
 
 " TAB Completion : 1st longest fit, 2nd list, 3rd cycle
 set wildmode=longest,list,full
@@ -182,12 +187,12 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CLANG FORMAT PLUGIN:
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<cr>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<cr>
 " if you install vim-operator-user
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
-"nmap <Leader>C :ClangFormatAutoToggle<CR>
+"nmap <Leader>C :ClangFormatAutoToggle<cr>
 map <C-K> <Plug>(operator-clang-format)
 
 let g:clang_format#style_options = {
@@ -256,21 +261,44 @@ let g:clang_format#style_options = {
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ACK PLUGIN:
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AIRLINE PLUGIN:
 let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE PLUGIN:
-nmap <F12> :NERDTreeToggle<CR>
+nmap <F12> :NERDTreeToggle<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TAGBAR PLUGIN:
-nmap <F8> : Tagbar<CR>
+nmap <F8> : Tagbar<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAKE command
-nnoremap <F5> :Make!<CR>
+" MAKE COMMAND:
+nnoremap <F5> :Make!<cr>
 set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;\ ./install.sh;\ cd\ -
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CTRLP PLUGIN
+ " Set no max file limit
+let g:ctrlp_max_files = 0
+" Search from current directory instead of project root
+let g:ctrlp_working_path_mode = 0
+
+" Ignore these directories
+set wildignore+=*/out/**
+set wildignore+=*/vendor/**
+
+" Search in certain directories a large project (hardcoded for now)
+cnoremap %proj <c-r>=expand('~/Projects/some-project')<cr>
+" ga = go api
+map <Leader>ga :CtrlP %proj/api/<cr>
+" gf = go frontend
+map <Leader>gf :CtrlP %proj/some/long/path/to/frontend/code/<cr>
 
 "finish
