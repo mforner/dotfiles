@@ -14,6 +14,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-sleuth'
 
 Plugin 'scrooloose/nerdtree'      " fileexplorer
 Plugin 'flazz/vim-colorschemes'   " colorschemes
@@ -70,17 +71,17 @@ nmap <leader>sv :source $MYVIMRC<cr>
 
 " Tabstops are 2 spaces
 
-autocmd FileType c,cpp,objc,javascript set tabstop=2
-autocmd FileType c,cpp,objc,javascript set shiftwidth=2
-autocmd FileType c,cpp,objc,javascript set softtabstop=2
-autocmd FileType c,cpp,objc,javascript set textwidth=80
+"autocmd FileType c,cpp,objc,javascript set tabstop=2
+"autocmd FileType c,cpp,objc,javascript set shiftwidth=2
+"autocmd FileType c,cpp,objc,javascript set softtabstop=2
+"autocmd FileType c,cpp,objc,javascript set textwidth=80
+"
+"autocmd FileType python,php set tabstop=4
+"autocmd FileType python,php set shiftwidth=4
+"autocmd FileType python,php set softtabstop=4
+"autocmd FileType python,php set textwidth=80
 
-autocmd FileType python,php set tabstop=4
-autocmd FileType python,php set shiftwidth=4
-autocmd FileType python,php set softtabstop=4
-autocmd FileType python,php set textwidth=80
-
-set expandtab
+"set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
 let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
