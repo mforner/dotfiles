@@ -281,18 +281,25 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAKE command
 nnoremap <F5> :Make!<CR>
-set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;\ ./install.sh;\ cd\ -
+set makeprg=cd\ ~/projekte/unity-a2/simcom\ &&\ ./install.sh;\ cd\ -
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRLP PLUGIN
  " Set no max file limit
 let g:ctrlp_max_files = 0
 " Search from current directory instead of project root
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'ra'
 
 " Ignore these directories
 set wildignore+=*/out/**
 set wildignore+=*/vendor/**
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn|ariag25root-20160617)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': '\v\.(ariag25root-2)',
+      \ }
 
 " Search in certain directories a large project (hardcoded for now)
 cnoremap %proj <c-r>=expand('~/Projects/some-project')<cr>
