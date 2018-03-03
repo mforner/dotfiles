@@ -6,29 +6,51 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'        " package manager
 Plugin 'flazz/vim-colorschemes'   " colorschemes
+
 Plugin 'tpope/vim-surround'       " modify surrounding parentheses etc
 Plugin 'tpope/vim-sensible'       " some sensible defaults
+Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
 Plugin 'tpope/vim-repeat'         " make . work with surround
-Plugin 'scrooloose/nerdcommenter' " <leader>cc
-Plugin 'kien/ctrlp.vim'           " fuzzy search
-Plugin 'scrooloose/nerdtree'      " fileexplorer
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-abolish'        " abbreviations
+
 Plugin 'bling/vim-airline'        " colorfull status bar
 Plugin 'godlygeek/tabular'        " align, :Tabularize /pattern
 
 Plugin 'kana/vim-operator-user'   " lib for defining operators, clang
 Plugin 'rhysd/vim-clang-format'   " format c/c++
-Plugin 'tpope/vim-dispatch'
 
-Plugin 'vim-scripts/a.vim'        " alternate files, <leader>ih
 
-Plugin 'SirVer/ultisnips'         " snippets TAB
+" snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-"Plugin 'tpope/vim-abolish'        " abbreviations
-"Plugin 'tpope/vim-fugitive'       " git commands
-"Plugin 'tpope/vim-unimpaired'     " [a, ]b, etc.
-"Plugin 'tpope/vim-abolish'        " abbreviations
+Plugin 'jceb/vim-orgmode'
 
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'vim-syntastic/syntastic'
+
+Plugin 'tell-k/vim-autopep8'
+
+Plugin 'craigemery/vim-autotag'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'kien/ctrlp.vim'
+
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'      " fileexplorer
+
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()         " required
@@ -43,19 +65,13 @@ nnoremap <c-e> ,
 " gui
 set guioptions=acg
 
-nmap <silent><leader>of :A<cr>
+set ff=unix
 
 " Let's make it easy to edit this file (mnemonic for the key sequence is
 " 'e'dit 'v'imrc)
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
 " 's'ource 'v'imrc
 nmap <leader>sv :source $MYVIMRC<cr>
-
-" Tabstops are 2 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
 
 let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
 let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
@@ -70,11 +86,9 @@ if has("gui_running")
     endif
 endif
 
+
 " allow buffers to go to background w/out saving etc.
 set hidden
-
-" write as using sudo
-command! W w !sudo tee % > /dev/null
 
 " TAB Completion : 1st longest fit, 2nd list, 3rd cycle
 set wildmode=longest,list,full
@@ -140,9 +154,14 @@ let &colorcolumn=join(range(81),",")
 let &colorcolumn="80,".join(range(120,999),",")
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
+set undofile
+" Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories
+set undolevels=1000 " How many undos
+set undoreload=10000 " number of lines to save for undo
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PRINTING:
-
 " some printing options
 set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
 " set the print-command
@@ -155,6 +174,7 @@ function! PrintFile(fname)
   return v:shell_error
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CLANG FORMAT PLUGIN:
 
 " \ "SplitEmptyFunctions" : "true",
@@ -231,45 +251,130 @@ let g:ctrlp_root_markers = ['.ctrlp']
 nnoremap <leader>. :CtrlPTag<cr>
 
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<cr>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<cr>
 " if you install vim-operator-user
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
-"nmap <Leader>C :ClangFormatAutoToggle<CR>
+"nmap <Leader>C :ClangFormatAutoToggle<cr>
 map <C-K> <Plug>(operator-clang-format)
 
-" AIRLINE PLUGIN:
+let g:clang_format#style_options = {
+     \ "AccessModifierOffset"                            : -2,
+      \ "AlignAfterOpenBracket"                          : "Align",
+      \ "AlignConsecutiveAssignments"                    : "true",
+      \ "AlignConsecutiveDeclarations"                   : "true",
+      \ "AlignOperands"                                  : "true",
+      \ "AlignTrailingComments"                          : "true",
+      \ "AllowAllParametersOfDeclarationOnNextLine"      : "true",
+      \ "AllowShortBlocksOnASingleLine"                  : "false",
+      \ "AllowShortCaseLabelsOnASingleLine"              : "false",
+      \ "AllowShortFunctionsOnASingleLine"               : "Empty",
+      \ "AllowShortIfStatementsOnASingleLine"            : "false",
+      \ "AllowShortLoopsOnASingleLine"                   : "false",
+      \ "AlwaysBreakAfterReturnType"                     : "All",
+      \ "AlwaysBreakBeforeMultilineStrings"              : "false",
+      \ "AlwaysBreakTemplateDeclarations"                : "true",
+      \ "BinPackArguments"                               : "true",
+      \ "BinPackParameters"                              : "true",
+      \ "BreakBeforeBinaryOperators"                     : "NonAssignment",
+      \ "BreakBeforeBraces"                              : "Custom",
+      \ "BraceWrapping"                                  : {
+                 \ "AfterClass"            : "false" ,
+                 \ "AfterControlStatement" : "false",
+                 \ "AfterEnum"             : "true",
+                 \ "AfterFunction"         : "true",
+                 \ "AfterNamespace"        : "false",
+                 \ "AfterStruct"           : "false",
+                 \ "AfterUnion"            : "false",
+                 \ "BeforeCatch"           : "true",
+                 \ "BeforeElse"            : "false",
+                 \ "IndentBraces"          : "false",
+      \},
+      \ "BreakBeforeTernaryOperators"                    : "false",
+      \ "ColumnLimit"                                    : 79,
+      \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "false",
+      \ "ConstructorInitializerIndentWidth"              : 2,
+      \ "ContinuationIndentWidth"                        : 2,
+      \ "Cpp11BracedListStyle"                           : "false",
+      \ "DerivePointerAlignment"                         : "false",
+      \ "DisableFormat"                                  : "false",
+      \ "ExperimentalAutoDetectBinPacking"               : "false",
+      \ "IndentCaseLabels"                               : "false",
+      \ "IndentWidth"                                    : 2,
+      \ "IndentWrappedFunctionNames"                     : "false",
+      \ "KeepEmptyLinesAtTheStartOfBlocks"               : "true",
+      \ "Language"                                       : "Cpp",
+      \ "MaxEmptyLinesToKeep"                            : 2,
+      \ "NamespaceIndentation"                           : "None",
+      \ "PointerAlignment"                               : "Left",
+      \ "ReflowComments"                                 : "false",
+      \ "SortIncludes"                                   : "false",
+      \ "SpaceAfterCStyleCast"                           : "true",
+      \ "SpaceBeforeAssignmentOperators"                 : "true",
+      \ "SpaceBeforeParens"                              : "ControlStatements",
+      \ "SpaceInEmptyParentheses"                        : "false",
+      \ "SpacesBeforeTrailingComments"                   : 3,
+      \ "SpacesInAngles"                                 : "false",
+      \ "SpacesInCStyleCastParentheses"                  : "false",
+      \ "SpacesInParentheses"                            : "false",
+      \ "SpacesInSquareBrackets"                         : "false",
+      \ "Standard"                                       : "Cpp03",
+      \ "UseTab"                                         : "Never",
+\}
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOPEP8 PLUGIN
+let g:autopep8_max_line_length=79
+let g:autopep8_indent_size=2
+let g:autopep8_disable_show_diff=1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ACK PLUGIN:
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AIRLINE PLUGIN:
 let g:airline_powerline_fonts = 1
 
-" NERDTREE PLUGIN:
-
-nmap <F12> :NERDTreeToggle<CR>
-
-" ULTISNIPS:
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"" If you want :UltiSnipsEdit to split your window.
-
-"let g:UltiSnipsEditSplit="vertical"
-"
-nnoremap <F5> :Make<CR>
 set makeprg=cd\ ~/src/build\ &&\ make\ &&\ cd\ -
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTREE PLUGIN:
+nmap <F12> :NERDTreeToggle<cr>
+>>>>>>> 080b7883f76c6c611a1578b53398cd4487d51839
 
-iabbrev udn und
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TAGBAR PLUGIN:
+nmap <F8> : Tagbar<cr>
 
-set undofile                " Save undo's after file closes
-set undodir=$HOME/.vim/undo " where to save undo histories
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ACK PLUGIN
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAKE command
+nnoremap <F5> :Make!<CR>
+set makeprg=cd\ ~/projekte/cwd/unity-a2/simcom;\ ./install.sh;\ cd\ -
 
-" run line through shell
-"noremap Q !!$SHELL<CR>
-"
-" Hit <alt-v> in : mode, copy last line into command buffer
-"cnoremap <M-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CTRLP PLUGIN
+ " Set no max file limit
+let g:ctrlp_max_files = 0
+" Search from current directory instead of project root
+let g:ctrlp_working_path_mode = 0
+
+" Ignore these directories
+set wildignore+=*/out/**
+set wildignore+=*/vendor/**
+
+" Search in certain directories a large project (hardcoded for now)
+cnoremap %proj <c-r>=expand('~/Projects/some-project')<cr>
+" ga = go api
+map <Leader>ga :CtrlP %proj/api/<cr>
+" gf = go frontend
+map <Leader>gf :CtrlP %proj/some/long/path/to/frontend/code/<cr>
 
 "finish
