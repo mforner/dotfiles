@@ -1,1 +1,1 @@
-function gg { gvim --remote-silent "$@" || gvim "$@"; }
+function gg { gvim --remote-silent "$@"; }
