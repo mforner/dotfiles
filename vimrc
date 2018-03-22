@@ -307,7 +307,7 @@ nnoremap <F9> :Dispatch<CR>
 nnoremap <F5> :Make!<CR>
 " set makeprg=~/projekte/unity-a2/install.sh
 "set makeprg=~/projekte/unity-a2/bincore/install.sh
-set makeprg=cd\ ~/projekte/unity-a2/bincore;make;cd\ -
+set makeprg=make\ -C\ ~/projekte/unity-a2/bincore
 "==============================================================================
 " Plugin 'vim-syntastic/syntastic'
 "=================================
@@ -382,6 +382,7 @@ let g:header_field_timestamp_format='%Y-%m-%d'
 "==============================
 autocmd FileType php setlocal commentstring=//\ %s
 autocmd FileType cmake setlocal commentstring=#\ %s
+autocmd FileType cpp setlocal commentstring=//\ %s
 
 "=============================================================================
 "Plugin 'maksimr/vim-jsbeautify'
