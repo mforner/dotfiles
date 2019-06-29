@@ -2,6 +2,7 @@ if &compatible
   set nocompatible
 endif
 
+" === minpac configuration ==={{{
 if exists ('*minpac#init')
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -18,6 +19,10 @@ if exists ('*minpac#init')
   call minpac#add('tpope/vim-abolish')
   call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-projectionist')
+  call minpac#add('tpope/vim-vinegar')
+  call minpac#add('tpope/vim-fugitive')
+
+  call minpac#add('plytophogy/vim-virtualenv')
 
   call minpac#add('powentan/vim-jsrender')
   call minpac#add('tell-k/vim-autopep8')
@@ -41,25 +46,26 @@ if exists ('*minpac#init')
   call minpac#add('craigemery/vim-autotag')
   call minpac#add('mileszs/ack.vim')
   call minpac#add('vim-syntastic/syntastic')
-  call minpac#add('scrooloose/nerdtree')
   call minpac#add('bling/vim-airline')
   call minpac#add('mattn/emmet-vim')
+  call minpac#add('junegunn/vim-easy-align')
 
-  call minpac#add('kana/vim-textobj-indent')        " ai/ii, aI/iI
-  call minpac#add('kana/vim-textobj-entire')        " ae/ie
-  call minpac#add('kana/vim-textobj-line')          " al/il
-  call minpac#add('bps/vim-textobj-python')         " af/if, ac/ic
+
+  call minpac#add('glts/vim-textobj-comment')         " af/if, ac/ic
   call minpac#add('libclang-vim/vim-textobj-clang') " i;f/a;c
 
   call minpac#add('MarcWeber/vim-addon-mw-utils')    " snippets
   call minpac#add('tomtom/tlib_vim')                 " snippets
   call minpac#add('garbas/vim-snipmate')             " snippets
   call minpac#add('honza/vim-snippets')              " snippets
+
+  call minpac#add('chrisbra/vim-diff-enhanced')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
+"}}}
 
 """ required
 filetype plugin indent on
@@ -90,17 +96,17 @@ let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
 
 """ configureation for gui
 if has("gui_running")
-  exe "set guifont=" . g:main_font
+  exe "set guifont=".g:main_font
   set background=dark
-  colorscheme twilight
-  if !exists("g:vimrcloaded")
-    winpos 0 0
-    winsize 130 120
-    let g:vimrcloaded = 1
-    set background=dark
-  else
-    colorscheme apprentice
-  endif
+  " colorscheme twilight
+  " if !exists("g:vimrcloaded")
+  "   winpos 0 0
+  "   winsize 130 120
+  "   let g:vimrcloaded = 1
+  "   set background=dark
+  " else
+  colorscheme apprentice
+  " endif
 endif
 
 """ allow buffers to go to background w/out saving etc.
@@ -111,6 +117,9 @@ command! W w !sudo tee % > /dev/null
 
 """ TAB Completion : 1st longest fit, 2nd list, 3rd cycle
 set wildmode=longest,list,full
+
+""" disable modelines
+set nomodeline
 
 """ wrap around file end when searching
 set wrapscan
@@ -142,6 +151,8 @@ set lazyredraw
 
 """ show mode below commandline -- note: redundant to airline
 set showmode
+" let g:airline_section_b = airline#section#create('@%{virtualenv#statusline()}')
+
 
 """ Disable wordwrap
 set nowrap
@@ -212,6 +223,16 @@ set diffopt+=iwhite
 """ printing options
 set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
 
+""" configure make program
+set makeprg=make\ -j8\ -C\ ~/projekte/unity-a2/bincore/build
+
+nnoremap <F9> :Dispatch<CR>
+
+nnoremap <F6> :Make<CR>
+
+" nnoremap <F5> :Make!<CR>
+noremap <F5> :exec '!/home/mario/projekte/unity-a2/be4trade/install.sh'<CR>
+
 """ configure printing function (outdated)
 set printexpr=PrintFile(v:fname_in)
 function! PrintFile(fname)
@@ -222,9 +243,10 @@ function! PrintFile(fname)
   return v:shell_error
 endfunction
 
-"---------------------------------------------------------------------------
-"   Plugin 'rhysd/vim-clang-format'
-"---------------------------------------------------------------------------
+if has("patch-8.1.0360")
+    set diffopt+=internal,algorithm:patience
+endif
+" === Plugin 'rhysd/vim-clang-format' ==={{{
 
 """ map to <Leader>cf in C++ code (normal)
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
@@ -250,7 +272,7 @@ let g:clang_format#style_options = {
       \ "AllowShortBlocksOnASingleLine"                  : "false",
       \ "AllowShortCaseLabelsOnASingleLine"              : "false",
       \ "AllowShortFunctionsOnASingleLine"               : "Empty",
-      \ "AllowShortIfStatementsOnASingleLine"            : "false",
+      \ "AllowShortIfStatementsOnASingleLine"            : "true",
       \ "AllowShortLoopsOnASingleLine"                   : "false",
       \ "AlwaysBreakAfterReturnType"                     : "All",
       \ "AlwaysBreakBeforeMultilineStrings"              : "false",
@@ -302,51 +324,29 @@ let g:clang_format#style_options = {
       \ "Standard"                                       : "Cpp03",
       \ "UseTab"                                         : "Never",
 \}
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'tell-k/vim-autopep8'
-"---------------------------------------------------------------------------
+" ===  Plugin 'tell-k/vim-autopep8' ==={{{
 let g:autopep8_max_line_length=79
 let g:autopep8_indent_size=2
 let g:autopep8_disable_show_diff=1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'bling/vim-airline'
-"---------------------------------------------------------------------------
+" ===  Plugin 'bling/vim-airline' ==={{{
 let g:airline_powerline_fonts = 1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'majutsushi/tagbar'
-"---------------------------------------------------------------------------
+" === Plugin 'majutsushi/tagbar' ==={{{
 nmap <F8> :Tagbar<cr>
+"}}}
 
-"---------------------------------------------------------------------------
-"  Plugin 'scrooloose/nerdtree'
-"---------------------------------------------------------------------------
-nmap <F12> :NERDTreeToggle<cr>
-
-"----------------------------------------------------------------------------
-"   Plugin 'tpope/vim-dispatch'
-"---------------------------------------------------------------------------
-nnoremap <F9> :Dispatch<CR>
-nnoremap <F6> :Make<CR>
-"nnoremap <F5> :Make!<CR>
-noremap <F5> :exec '!/home/mario/projekte/unity-a2/be4trade/install.sh'<CR>
-
-""" configure make program
-" set makeprg=make\ -j8\ -C\ ~/pc/bincore
-set makeprg=make\ -j8\ -C\ ~/projekte/unity-a2/bincore
-
-"---------------------------------------------------------------------------
-"   Plugin 'mileszs/ack.vim'
-"---------------------------------------------------------------------------
+" === Plugin 'mileszs/ack.vim' ==={{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'vim-syntastic/syntastic'
-"---------------------------------------------------------------------------
+" ===  Plugin 'vim-syntastic/syntastic' ==={{{
 "let g:syntastic_php_checkers = ['php']
 let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_exec = '~/.composer/vendor/bin/phpcs'
@@ -359,57 +359,45 @@ let g:syntastic_html_tidy_ignore_errors =  []
 "let g:syntastic_html_tidy_blocklevel_tags = []
 "let g:syntastic_html_tidy_inline_tags = []
 "let g:syntastic_html_tidy_empty_tags = []
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin '2072/PHP-Indenting-for-VIm'
-"---------------------------------------------------------------------------
+" === Plugin '2072/PHP-Indenting-for-VIm' ==={{{
 let g:PHP_vintage_case_default_indent = 1
 let g:PHP_removeCRwhenUnix = 1
 let g:PHP_autoformatcomment = 0
 let php_sql_query = 0
 let php_htmlInStrings = 0
 let php_baselib = 0
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'stephpy/vim-php-cs-fixer'
-"---------------------------------------------------------------------------
+" === Plugin 'stephpy/vim-php-cs-fixer' ==={{{
 let g:php_cs_fixer_rules = "@PSR2"
 "et g:php_cs_fixer_php_path = =php=
 let g:php_cs_fixer_dry_run = 0
 let g:php_cs_fixer_verbose = 0
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'tell-k/vim-autopep8'
-"---------------------------------------------------------------------------
+" === Plugin: 'tell-k/vim-autopep8' ==={{{
 let g:autopep8_max_line_length=79
 let g:autopep8_indent_size=2
 let g:autopep8_disable_show_diff=1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'mileszs/ack.vim'
-"---------------------------------------------------------------------------
+" ===  Plugin: 'mileszs/ack.vim' ==={{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'bling/vim-airline'
-"---------------------------------------------------------------------------
+" === Plugin: 'bling/vim-airline' ==={{{
 let g:airline_powerline_fonts = 1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'scrooloose/nerdtree'
-"---------------------------------------------------------------------------
-nmap <F12> :NERDTreeToggle<cr>
-
-"---------------------------------------------------------------------------
-"   Plugin: 'majutsushi/tagbar'
-"---------------------------------------------------------------------------
+" === Plugin: 'majutsushi/tagbar' ==={{{
 nmap <F8> : Tagbar<cr>
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'vim-syntastic/syntastic'
-"---------------------------------------------------------------------------
+" === Plugin: 'vim-syntastic/syntastic' ==={{{
 let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_args = '--standard=psr2'
 let g:syntastic_php_phpcs_exec = '~/vendor/bin/phpcs'
@@ -418,29 +406,26 @@ let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,u
 
 let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'tpope/vim-commentary'
-"---------------------------------------------------------------------------
+" === Plugin 'tpope/vim-commentary' ==={{{
 autocmd FileType php setlocal commentstring=//\ %s
 autocmd FileType cmake setlocal commentstring=#\ %s
 autocmd FileType cpp setlocal commentstring=//\ %s
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'pangloss/vim-javascript'
-"---------------------------------------------------------------------------
+" ===  Plugin 'pangloss/vim-javascript' ==={{{
 let g:javascript_plugin_jsdoc = 1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin 'junegunn/vim-easy-align'
-"---------------------------------------------------------------------------
+" === Plugin 'junegunn/vim-easy-align' ==={{{
  " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+"}}}
 
-"---------------------------------------------------------------------------
-"  Plugin 'maksimr/vim-jsbeautify'
-"---------------------------------------------------------------------------
+" === Plugin 'maksimr/vim-jsbeautify' ==={{{
 " autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 " autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 " autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
@@ -452,31 +437,30 @@ nmap ga <Plug>(EasyAlign)
 " autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
 " autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 " autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'stephpy/vim-php-cs-fixer'
-"---------------------------------------------------------------------------
+" === Plugin: 'stephpy/vim-php-cs-fixer' ==={{{
 let g:php_cs_fixer_rules = "@PSR2"
 let g:php_cs_fixer_php_path = "php"
 let g:PHP_vintage_case_default_indent = 1
+"}}}
 
-"---------------------------------------------------------------------------
-"   Plugin: 'tpope/vim-commentary'
-"---------------------------------------------------------------------------
- autocmd FileType php setlocal commentstring=#\ %s
-
-"---------------------------------------------------------------------------
-"   Plugin 'pangloss/vim-javascript'
-"---------------------------------------------------------------------------
+" === Plugin: 'tpope/vim-commentary' ==={{{
+ autocmd FileType php setlocal commentstring=//\ %s
+"}}}
+"
+" === Plugin 'pangloss/vim-javascript' ==={{{
 let g:javascript_plugin_jsdoc = 1
+"}}}
 
-"---------------------------------------------------------------------------
-"    Plugin 'junegunn/vim-easy-align'
-"---------------------------------------------------------------------------
- " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" === Plugin 'tpope/vim-vinegar' 'netrw' ==={{{
+let g:netrw_altfile = 1
+let g:netrw_list_hide = '.*\.pyc'
+"}}}
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" === Plugin 'plytophogy/vim-virtualenv' ==={{{
+let g:virtualenv_directory = $HOME."/python-virtualenv"
+"}}}
 
+nnoremap <leader>cd :cd %:p:h<cr>
 "finish
