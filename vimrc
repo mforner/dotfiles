@@ -24,6 +24,9 @@ if exists ('*minpac#init')
 
   call minpac#add('plytophogy/vim-virtualenv')
 
+
+  call minpac#add('lepture/vim-jinja')
+
   call minpac#add('powentan/vim-jsrender')
   call minpac#add('tell-k/vim-autopep8')
   call minpac#add('maksimr/vim-jsbeautify')
@@ -461,6 +464,7 @@ let g:netrw_list_hide = '.*\.pyc'
 " === Plugin 'plytophogy/vim-virtualenv' ==={{{
 let g:virtualenv_directory = $HOME."/python-virtualenv"
 "}}}
+
 
 nnoremap <leader>cd :cd %:p:h<cr>
 "finish
