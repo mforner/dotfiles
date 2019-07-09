@@ -466,7 +466,7 @@ let g:virtualenv_directory = $HOME."/python-virtualenv"
 "}}}
 
 " === Plugin  'tpope/vim-abolish' === {{{
-Abolish timout timeout
+" Abolish timout{error,} timeout{}
 "}}}
 
 
