@@ -465,6 +465,10 @@ let g:netrw_list_hide = '.*\.pyc'
 let g:virtualenv_directory = $HOME."/python-virtualenv"
 "}}}
 
+" === Plugin  'tpope/vim-abolish' === {{{
+Abolish timout timeout
+"}}}
+
 
 nnoremap <leader>cd :cd %:p:h<cr>
 "finish
