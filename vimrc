@@ -63,6 +63,9 @@ if exists ('*minpac#init')
   call minpac#add('honza/vim-snippets')              " snippets
 
   call minpac#add('chrisbra/vim-diff-enhanced')
+  call minpac#add('mustache/vim-mustache-handlebars')
+
+
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -196,13 +199,10 @@ set listchars=tab:>-,trail:~
 set list
 
 """ highlight ColorColumn ctermbg=235 guibg=#2c2d27
-set colorcolumn=80
+set colorcolumn=81
 
 """ these commands autoopen folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
-
-""" set printing options
-set colorcolumn=80
 
 """ These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
@@ -221,7 +221,7 @@ set undolevels=1000
 set undoreload=10000
 
 """ ignore whitespace only differences
-set diffopt+=iwhite
+" set diffopt+=iwhite
 
 """ printing options
 set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
@@ -235,6 +235,7 @@ nnoremap <F6> :Make<CR>
 
 " nnoremap <F5> :Make!<CR>
 noremap <F5> :exec '!/home/mario/projekte/unity-a2/be4trade/install.sh'<CR>
+" noremap <F5> :exec '!/home/mario/repos/unity-a2/tags/unity-a2-stable-1901/be4trade/install.sh'<CR>
 
 """ configure printing function (outdated)
 set printexpr=PrintFile(v:fname_in)
@@ -272,13 +273,13 @@ let g:clang_format#style_options = {
       \ "AlignOperands"                                  : "true",
       \ "AlignTrailingComments"                          : "true",
       \ "AllowAllParametersOfDeclarationOnNextLine"      : "true",
-      \ "AllowShortBlocksOnASingleLine"                  : "false",
-      \ "AllowShortCaseLabelsOnASingleLine"              : "false",
+      \ "AllowShortBlocksOnASingleLine"                  : "true",
+      \ "AllowShortCaseLabelsOnASingleLine"              : "true",
       \ "AllowShortFunctionsOnASingleLine"               : "Empty",
-      \ "AllowShortIfStatementsOnASingleLine"            : "true",
+      \ "AllowShortIfStatementsOnASingleLine"            : "false",
       \ "AllowShortLoopsOnASingleLine"                   : "false",
       \ "AlwaysBreakAfterReturnType"                     : "All",
-      \ "AlwaysBreakBeforeMultilineStrings"              : "false",
+      \ "AlwaysBreakBeforeMultilineStrings"              : "true",
       \ "AlwaysBreakTemplateDeclarations"                : "true",
       \ "BinPackArguments"                               : "true",
       \ "BinPackParameters"                              : "true",
@@ -297,7 +298,7 @@ let g:clang_format#style_options = {
                  \ "IndentBraces"          : "false",
       \},
       \ "BreakBeforeTernaryOperators"                    : "false",
-      \ "ColumnLimit"                                    : 79,
+      \ "ColumnLimit"                                    : 80,
       \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
       \ "ConstructorInitializerIndentWidth"              : 2,
       \ "ContinuationIndentWidth"                        : 2,
@@ -317,7 +318,7 @@ let g:clang_format#style_options = {
       \ "SortIncludes"                                   : "false",
       \ "SpaceAfterCStyleCast"                           : "true",
       \ "SpaceBeforeAssignmentOperators"                 : "true",
-      \ "SpaceBeforeParens"                              : "ControlStatements",
+      \ "SpaceBeforeParens"                              : "Never",
       \ "SpaceInEmptyParentheses"                        : "false",
       \ "SpacesBeforeTrailingComments"                   : 4,
       \ "SpacesInAngles"                                 : "false",
@@ -358,7 +359,7 @@ let g:syntastic_php_phpcs_args = '--standard=PSR2'
 "let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
 
 "let g:syntastic_html_tidy_ignore_errors = ['<input> proprietary attribute "role"']
-let g:syntastic_html_tidy_ignore_errors =  []
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 "let g:syntastic_html_tidy_blocklevel_tags = []
 "let g:syntastic_html_tidy_inline_tags = []
 "let g:syntastic_html_tidy_empty_tags = []
@@ -466,7 +467,7 @@ let g:virtualenv_directory = $HOME."/python-virtualenv"
 "}}}
 
 " === Plugin  'tpope/vim-abolish' === {{{
-" Abolish timout{error,} timeout{}
+" see: vim/after/plugin/abolish.vim
 "}}}
 
 
