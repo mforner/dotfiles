@@ -3,7 +3,8 @@ if &compatible
 endif
 
 " === minpac configuration ==={{{
-if exists ('*minpac#init')
+if !exists ('g:loaded_minpac')
+else
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
@@ -13,11 +14,14 @@ if exists ('*minpac#init')
   call minpac#add('tpope/vim-unimpaired')
   call minpac#add('tpope/vim-commentary')
   call minpac#add('tpope/vim-eunuch')
-  call minpac#add('tpope/vim-sleuth')
   call minpac#add('tpope/vim-abolish')
   call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-projectionist')
   call minpac#add('tpope/vim-vinegar')
+  call minpac#add('tpope/vim-sleuth')
+
+  " colorscheme vividchalk
+  call minpac#add('tpope/vim-vividchalk')
 
   " Jinja bundle for vim.
   call minpac#add('lepture/vim-jinja')
@@ -56,6 +60,9 @@ if exists ('*minpac#init')
   " type="text/x-jsrender".
   call minpac#add('powentan/vim-jsrender')
 
+  " colorscheme landsape
+  call minpac#add('itchyny/landscape.vim')
+
   call minpac#add('vim-syntastic/syntastic')
 
   call minpac#add('junegunn/vim-easy-align')
@@ -63,7 +70,6 @@ if exists ('*minpac#init')
   call minpac#add('chrisbra/vim-diff-enhanced')
   call minpac#add('Yggdroot/indentLine')
   call minpac#add('itchyny/lightline.vim')
-  call minpac#add('flazz/vim-colorschemes')
 
   call minpac#add('Chiel92/vim-autoformat')
   call minpac#add('plytophogy/vim-virtualenv')
@@ -97,15 +103,11 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 """ 's'ource 'v'imrc
 nmap <leader>sv :source $MYVIMRC<cr>
 
-""" configure fonts for terminal
-let g:main_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 10"
-let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
+colorscheme vividchalk
 
 """ configureation for gui
 if has("gui_running")
-  exe "set guifont=".g:main_font
   set background=dark
-  colorscheme vividchalk
 endif
 
 """ allow buffers to go to background w/out saving etc.
@@ -211,35 +213,15 @@ set undoreload=10000
 """ ignore whitespace only differences
 " set diffopt+=iwhite
 
-""" printing options
-set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
-
 """ configure make program
-set makeprg=make\ -j8\ -C\ ~/projekte/unity-a2/bincore/build
-"set makeprg=make\ -j8\ -C\ ~/repos/unity-a2/trunk/bincore/build
-"set makeprg=make\ -j8\ -C\ ~/repos/unity-a2/branches/feature_ignore_transient_errors/bincore/build
-
-nnoremap <F9> :Dispatch<CR>
+set makeprg=""
 
 nnoremap <F6> :Make<CR>
-
-" nnoremap <F5> :Make!<CR>
-noremap <F5> :exec '!/home/mario/projekte/unity-a2/be4trade/install.sh'<CR>
-" noremap <F5> :exec '!/home/mario/repos/unity-a2/tags/unity-a2-stable-1901/be4trade/install.sh'<CR>
-
-""" configure printing function (outdated)
-set printexpr=PrintFile(v:fname_in)
-function! PrintFile(fname)
-  call system("cat " . a:fname . "| lpr")
-  "call system("cat " . a:fname . "| lpr -o number-up=2")
-  "call system("cat " . a:fname . "| lpr -Pml1610 -o number-up=1")
-  call delete(a:fname)
-  return v:shell_error
-endfunction
 
 if has("patch-8.1.0360")
     set diffopt+=internal,algorithm:patience
 endif
+
 " === Plugin 'rhysd/vim-clang-format' ==={{{
 
 """ map to <Leader>cf in C++ code (normal)
@@ -393,10 +375,6 @@ autocmd FileType cmake setlocal commentstring=#\ %s
 autocmd FileType cpp setlocal commentstring=//\ %s
 "}}}
 
-" ===  Plugin 'pangloss/vim-javascript' ==={{{
-let g:javascript_plugin_jsdoc = 1
-"}}}
-
 " === Plugin 'junegunn/vim-easy-align' ==={{{
  " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -404,26 +382,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 "}}}
 
-" === Plugin 'maksimr/vim-jsbeautify' ==={{{
-" autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-" autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-" autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-"
-" autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-" autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
-" autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
-" autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-" autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
-"}}}
-
 " === Plugin: 'tpope/vim-commentary' ==={{{
  autocmd FileType php setlocal commentstring=//\ %s
-"}}}
-"
-" === Plugin 'pangloss/vim-javascript' ==={{{
-let g:javascript_plugin_jsdoc = 1
 "}}}
 
 " === Plugin 'tpope/vim-vinegar' 'netrw' ==={{{
