@@ -6,8 +6,6 @@ endif
 if exists ('*minpac#init')
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
-  call minpac#add('kana/vim-operator-user')
-  call minpac#add('kana/vim-textobj-user')
 
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-sensible')
@@ -20,52 +18,55 @@ if exists ('*minpac#init')
   call minpac#add('tpope/vim-dispatch')
   call minpac#add('tpope/vim-projectionist')
   call minpac#add('tpope/vim-vinegar')
-  call minpac#add('tpope/vim-fugitive')
 
-  call minpac#add('plytophogy/vim-virtualenv')
-
-
+  " Jinja bundle for vim.
   call minpac#add('lepture/vim-jinja')
 
-  call minpac#add('powentan/vim-jsrender')
+  " vim-autopep8 is a Vim plugin that applies autopep8 to your current file.
   call minpac#add('tell-k/vim-autopep8')
-  call minpac#add('maksimr/vim-jsbeautify')
-  call minpac#add('stephpy/vim-php-cs-fixer')
-  call minpac#add('rhysd/vim-clang-format')
-  call minpac#add('Chiel92/vim-autoformat')
 
+  " This plugin formats your code with specific coding style using clang-format.
+  call minpac#add('rhysd/vim-clang-format')
+
+  " This small script modifies Vim’s indentation behavior to comply with PEP8
+  " and my aesthetic preferences.
   call minpac#add('Vimjas/vim-python-pep8-indent')
-  call minpac#add('pangloss/vim-javascript')
-  call minpac#add('mxw/vim-jsx')
-  call minpac#add('jelera/vim-javascript-syntax')
-  call minpac#add('Matt-Deacalion/vim-systemd-syntax')
-  call minpac#add('2072/vim-syntax-for-PHP')
+
+  " indentation for PHP language
   call minpac#add('2072/PHP-Indenting-for-VIm')
+
+  " syntax highlighting for PHP language
+  call minpac#add('2072/vim-syntax-for-PHP')
+
+  " vim indentation for device tree files
   call minpac#add('jyelloz/vim-dts-indent')
 
-  call minpac#add('flazz/vim-colorschemes')
-  call minpac#add('jceb/vim-orgmode')
-  call minpac#add('majutsushi/tagbar')
-  call minpac#add('craigemery/vim-autotag')
-  call minpac#add('mileszs/ack.vim')
+  " syntax highlighting and filetype detection for systemd unit files!
+  call minpac#add('Matt-Deacalion/vim-systemd-syntax')
+
+  " Syntax highlighting for GNU Octave. It inherits the Matlab syntax
+  " highlighting and adds a few extra things like endif etc.
+  call minpac#add('tranvansang/octave.vim')
+
+  " JavaScript bundle for vim, this bundle provides syntax highlighting and
+  " improved indentation.
+  call minpac#add('pangloss/vim-javascript')
+
+  " Support embedded syntax highlight for html script tag with
+  " type="text/x-jsrender".
+  call minpac#add('powentan/vim-jsrender')
+
   call minpac#add('vim-syntastic/syntastic')
-  call minpac#add('bling/vim-airline')
-  call minpac#add('mattn/emmet-vim')
+
   call minpac#add('junegunn/vim-easy-align')
-
-
-  call minpac#add('glts/vim-textobj-comment')         " af/if, ac/ic
-  call minpac#add('libclang-vim/vim-textobj-clang') " i;f/a;c
-
-  call minpac#add('MarcWeber/vim-addon-mw-utils')    " snippets
-  call minpac#add('tomtom/tlib_vim')                 " snippets
-  call minpac#add('garbas/vim-snipmate')             " snippets
-  call minpac#add('honza/vim-snippets')              " snippets
-
+  call minpac#add('mileszs/ack.vim')
   call minpac#add('chrisbra/vim-diff-enhanced')
-  call minpac#add('mustache/vim-mustache-handlebars')
+  call minpac#add('Yggdroot/indentLine')
+  call minpac#add('itchyny/lightline.vim')
+  call minpac#add('flazz/vim-colorschemes')
 
-
+  call minpac#add('Chiel92/vim-autoformat')
+  call minpac#add('plytophogy/vim-virtualenv')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -104,15 +105,7 @@ let g:small_font = "DejaVu\\ Sans\\ Mono\\ for\\ Powerline\\ Book\\ 2"
 if has("gui_running")
   exe "set guifont=".g:main_font
   set background=dark
-  " colorscheme twilight
-  " if !exists("g:vimrcloaded")
-  "   winpos 0 0
-  "   winsize 130 120
-  "   let g:vimrcloaded = 1
-  "   set background=dark
-  " else
-  colorscheme apprentice
-  " endif
+  colorscheme vividchalk
 endif
 
 """ allow buffers to go to background w/out saving etc.
@@ -154,11 +147,6 @@ set number
 
 """ don't update the display while executing macros
 set lazyredraw
-
-""" show mode below commandline -- note: redundant to airline
-set showmode
-" let g:airline_section_b = airline#section#create('@%{virtualenv#statusline()}')
-
 
 """ Disable wordwrap
 set nowrap
@@ -228,6 +216,8 @@ set printoptions=paper:A4,syntax:n,wrap:y,duplex:off
 
 """ configure make program
 set makeprg=make\ -j8\ -C\ ~/projekte/unity-a2/bincore/build
+"set makeprg=make\ -j8\ -C\ ~/repos/unity-a2/trunk/bincore/build
+"set makeprg=make\ -j8\ -C\ ~/repos/unity-a2/branches/feature_ignore_transient_errors/bincore/build
 
 nnoremap <F9> :Dispatch<CR>
 
@@ -336,10 +326,6 @@ let g:autopep8_indent_size=2
 let g:autopep8_disable_show_diff=1
 "}}}
 
-" ===  Plugin 'bling/vim-airline' ==={{{
-let g:airline_powerline_fonts = 1
-"}}}
-
 " === Plugin 'majutsushi/tagbar' ==={{{
 nmap <F8> :Tagbar<cr>
 "}}}
@@ -374,13 +360,6 @@ let php_htmlInStrings = 0
 let php_baselib = 0
 "}}}
 
-" === Plugin 'stephpy/vim-php-cs-fixer' ==={{{
-let g:php_cs_fixer_rules = "@PSR2"
-"et g:php_cs_fixer_php_path = =php=
-let g:php_cs_fixer_dry_run = 0
-let g:php_cs_fixer_verbose = 0
-"}}}
-
 " === Plugin: 'tell-k/vim-autopep8' ==={{{
 let g:autopep8_max_line_length=79
 let g:autopep8_indent_size=2
@@ -391,10 +370,6 @@ let g:autopep8_disable_show_diff=1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-"}}}
-
-" === Plugin: 'bling/vim-airline' ==={{{
-let g:airline_powerline_fonts = 1
 "}}}
 
 " === Plugin: 'majutsushi/tagbar' ==={{{
@@ -443,12 +418,6 @@ nmap ga <Plug>(EasyAlign)
 " autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 "}}}
 
-" === Plugin: 'stephpy/vim-php-cs-fixer' ==={{{
-let g:php_cs_fixer_rules = "@PSR2"
-let g:php_cs_fixer_php_path = "php"
-let g:PHP_vintage_case_default_indent = 1
-"}}}
-
 " === Plugin: 'tpope/vim-commentary' ==={{{
  autocmd FileType php setlocal commentstring=//\ %s
 "}}}
@@ -470,6 +439,10 @@ let g:virtualenv_directory = $HOME."/python-virtualenv"
 " see: vim/after/plugin/abolish.vim
 "}}}
 
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal wrap
+augroup END
 
 nnoremap <leader>cd :cd %:p:h<cr>
 "finish
