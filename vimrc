@@ -96,6 +96,9 @@ else
 
   " colorscheme vividchalk
   call minpac#add('tpope/vim-vividchalk')
+
+  " indentation guides
+  call minpac#add('nathanaelkane/vim-indent-guides')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
