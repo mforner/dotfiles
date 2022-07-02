@@ -10,3 +10,5 @@ Session.vim
 *~
 #vim/pack
 vim/.netrwbook
+vim/undo
+vim/spell
