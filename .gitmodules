@@ -1,6 +1,0 @@
-[submodule "bash-it"]
-	path = bash-it
-	url = https://github.com/Bash-it/bash-it.git
-[submodule "vim/pack/minpac/opt/minpac"]
-	path = vim/pack/minpac/opt/minpac
-	url = https://github.com/k-takata/minpac.git
