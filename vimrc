@@ -114,7 +114,7 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:+
 runtime! plugin/sensible.vim
 
 """ use , as <leader> instead of \
-let mapleader=","
+let mapleader = ","
 
 """ map functionality of, to <c-e>: last c-f, c-t etc in reverse order
 nnoremap <c-e> ,
@@ -251,77 +251,17 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 """ Toggle auto formatting: nmap <Leader>C :ClangFormatAutoToggle<CR>
 map <C-K> <Plug>(operator-clang-format)
 
-""" configure indentation style
-let g:clang_format#style_options = {
-      \ "AccessModifierOffset"                           : -2,
-      \ "AlignAfterOpenBracket"                          : "Align",
-      \ "AlignConsecutiveAssignments"                    : "true",
-      \ "AlignConsecutiveDeclarations"                   : "true",
-      \ "AlignOperands"                                  : "true",
-      \ "AlignTrailingComments"                          : "true",
-      \ "AllowAllParametersOfDeclarationOnNextLine"      : "true",
-      \ "AllowShortBlocksOnASingleLine"                  : "true",
-      \ "AllowShortCaseLabelsOnASingleLine"              : "true",
-      \ "AllowShortFunctionsOnASingleLine"               : "Empty",
-      \ "AllowShortIfStatementsOnASingleLine"            : "false",
-      \ "AllowShortLoopsOnASingleLine"                   : "false",
-      \ "AlwaysBreakAfterReturnType"                     : "All",
-      \ "AlwaysBreakBeforeMultilineStrings"              : "true",
-      \ "AlwaysBreakTemplateDeclarations"                : "true",
-      \ "BinPackArguments"                               : "true",
-      \ "BinPackParameters"                              : "true",
-      \ "BreakBeforeBinaryOperators"                     : "NonAssignment",
-      \ "BreakBeforeBraces"                              : "Custom",
-      \ "BraceWrapping"                                  : {
-                 \ "AfterClass"            : "false" ,
-                 \ "AfterControlStatement" : "false",
-                 \ "AfterEnum"             : "true",
-                 \ "AfterFunction"         : "true",
-                 \ "AfterNamespace"        : "false",
-                 \ "AfterStruct"           : "false",
-                 \ "AfterUnion"            : "false",
-                 \ "BeforeCatch"           : "true",
-                 \ "BeforeElse"            : "true",
-                 \ "IndentBraces"          : "false",
-      \},
-      \ "BreakBeforeTernaryOperators"                    : "false",
-      \ "ColumnLimit"                                    : 80,
-      \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
-      \ "ConstructorInitializerIndentWidth"              : 2,
-      \ "ContinuationIndentWidth"                        : 2,
-      \ "Cpp11BracedListStyle"                           : "false",
-      \ "DerivePointerAlignment"                         : "false",
-      \ "DisableFormat"                                  : "false",
-      \ "ExperimentalAutoDetectBinPacking"               : "false",
-      \ "IndentCaseLabels"                               : "false",
-      \ "IndentWidth"                                    : 2,
-      \ "IndentWrappedFunctionNames"                     : "false",
-      \ "KeepEmptyLinesAtTheStartOfBlocks"               : "true",
-      \ "Language"                                       : "Cpp",
-      \ "MaxEmptyLinesToKeep"                            : 2,
-      \ "NamespaceIndentation"                           : "None",
-      \ "PointerAlignment"                               : "Left",
-      \ "ReflowComments"                                 : "false",
-      \ "SortIncludes"                                   : "false",
-      \ "SpaceAfterCStyleCast"                           : "true",
-      \ "SpaceBeforeAssignmentOperators"                 : "true",
-      \ "SpaceBeforeParens"                              : "Never",
-      \ "SpaceInEmptyParentheses"                        : "false",
-      \ "SpacesBeforeTrailingComments"                   : 4,
-      \ "SpacesInAngles"                                 : "false",
-      \ "SpacesInCStyleCastParentheses"                  : "false",
-      \ "SpacesInParentheses"                            : "false",
-      \ "SpacesInSquareBrackets"                         : "false",
-      \ "Standard"                                       : "Cpp03",
-      \ "UseTab"                                         : "Never",
-\}
+""" search .clang-format or _clang-format yaml configuration
+
+let g:clang_format#detect_style_file = 1
+
 "}}}
 
 " ===  Plugin 'tell-k/vim-autopep8' ==={{{
 
-let g:autopep8_max_line_length=79
-let g:autopep8_indent_size=2
-let g:autopep8_disable_show_diff=1
+let g:autopep8_max_line_length = 80
+let g:autopep8_indent_size = 2
+let g:autopep8_disable_show_diff = 1
 
 "}}}
 
@@ -360,14 +300,6 @@ let php_baselib = 0
 
 "}}}
 
-" === Plugin: 'tell-k/vim-autopep8' ==={{{
-
-let g:autopep8_max_line_length=79
-let g:autopep8_indent_size=2
-let g:autopep8_disable_show_diff=1
-
-"}}}
-
 " ===  Plugin: 'mileszs/ack.vim' ==={{{
 
 if executable('ag')
@@ -384,8 +316,7 @@ let g:syntastic_php_phpcs_exec = '~/vendor/bin/phpcs'
 let g:syntastic_php_phpmd_exec = '~/vendor/bin/phpmd'
 let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
 
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
+let g:syntastic_sass_checkers = ["sasslint"]
 
 "}}}
 
