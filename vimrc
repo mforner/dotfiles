@@ -199,7 +199,7 @@ let g:netrw_altfile = 1
 let g:netrw_list_hide = '.*\.pyc'
 
 
-let g:virtualenv_directory = $HOME."/python-virtualenv"
+let g:virtualenv_directory = $HOME."/python-environment"
 
 
 "finish
