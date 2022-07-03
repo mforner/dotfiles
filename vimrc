@@ -2,111 +2,6 @@ if &compatible
   set nocompatible
 endif
 
-if !exists ('g:loaded_minpac')
-else
-  call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})
-
-  " sensible default settings
-  call minpac#add('tpope/vim-sensible')
-
-  " surrond text objects with quotes or parentheses
-  call minpac#add('tpope/vim-surround')
-
-  " allow plugin mappings to be repeated with .
-  call minpac#add('tpope/vim-repeat')
-
-  " vim unimpaired: ]b, ]a, ]q, ]x, ]u, ]f, ]n, ]e, ]<space>
-  call minpac#add('tpope/vim-unimpaired')
-
-  " add or remove comment on selected text
-  call minpac#add('tpope/vim-commentary')
-
-  " delete, move, rename etc of current file
-  call minpac#add('tpope/vim-eunuch')
-
-  " define abbreviations and substitute for multiple case variants
-  call minpac#add('tpope/vim-abolish')
-
-  " vim dispatch
-  call minpac#add('tpope/vim-dispatch')
-
-  " project specific settings via json file
-  call minpac#add('tpope/vim-projectionist')
-
-  " use netrw as file browser
-  call minpac#add('tpope/vim-vinegar')
-
-  " configure indentation settings heuristically
-  call minpac#add('tpope/vim-sleuth')
-
-  " Jinja bundle for vim.
-  call minpac#add('lepture/vim-jinja')
-
-  " vim-autopep8 is a Vim plugin that applies autopep8 to your current file.
-  call minpac#add('tell-k/vim-autopep8')
-
-  " This plugin formats your code with specific coding style using clang-format.
-  call minpac#add('rhysd/vim-clang-format')
-
-  " python pep8 like indentation rules
-  call minpac#add('Vimjas/vim-python-pep8-indent')
-
-  " indentation for PHP language
-  call minpac#add('2072/PHP-Indenting-for-VIm')
-
-  " syntax highlighting for PHP language
-  call minpac#add('2072/vim-syntax-for-PHP')
-
-  " vim indentation for device tree files
-  call minpac#add('jyelloz/vim-dts-indent')
-
-  " syntax highlighting and filetype detection for systemd unit files!
-  call minpac#add('Matt-Deacalion/vim-systemd-syntax')
-
-  " syntax highlighting for GNU Octave
-  call minpac#add('tranvansang/octave.vim')
-
-  " javascirpt syntax highlighting
-  call minpac#add('yuezk/vim-js')
-
-  " colorscheme landsape
-  call minpac#add('itchyny/landscape.vim')
-
-  " syntax checking plugin
-  call minpac#add('vim-syntastic/syntastic')
-
-  " align text
-  call minpac#add('junegunn/vim-easy-align')
-
-  " regex search with :Ack
-  call minpac#add('mileszs/ack.vim')
-
-  " switch between diff algorithms patience, histogram
-  call minpac#add('chrisbra/vim-diff-enhanced')
-
-  " call minpac#add('Yggdroot/indentLine')
-  call minpac#add('itchyny/lightline.vim')
-
-  " switch python environment
-  call minpac#add('plytophogy/vim-virtualenv')
-
-  " colorscheme gruvbox
-  call minpac#add('morhetz/gruvbox')
-
-  " colorscheme vividchalk
-  call minpac#add('tpope/vim-vividchalk')
-
-  " indentation guides
-  call minpac#add('nathanaelkane/vim-indent-guides')
-endif
-
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
-
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-
-command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
-
 """ configure how to show whitespace override sensible.vim here
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:+
 
@@ -237,59 +132,31 @@ if has("patch-8.1.0360")
     set diffopt+=internal,algorithm:patience
 endif
 
-" === Plugin 'rhysd/vim-clang-format' ==={{{
+" see: vim/after/plugin/abolish.vim
 
-""" map to <Leader>cf in C++ code (normal)
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 
-""" map to <Leader>cf in C++ code (visual)
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal wrap
+augroup END
 
-""" if you install vim-operator-user
-autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+nnoremap <leader>cd :cd %:p:h<cr>
 
-""" Toggle auto formatting: nmap <Leader>C :ClangFormatAutoToggle<CR>
-map <C-K> <Plug>(operator-clang-format)
+""" Plugin configuration
 
 """ search .clang-format or _clang-format yaml configuration
 
 let g:clang_format#detect_style_file = 1
 
-"}}}
-
-" ===  Plugin 'tell-k/vim-autopep8' ==={{{
-
 let g:autopep8_max_line_length = 80
 let g:autopep8_indent_size = 2
 let g:autopep8_disable_show_diff = 1
 
-"}}}
 
-" === Plugin 'mileszs/ack.vim' ==={{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-"}}}
-
-" ===  Plugin 'vim-syntastic/syntastic' ==={{{
-
-"let g:syntastic_php_checkers = ['php']
-let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_exec = '~/.composer/vendor/bin/phpcs'
-let g:syntastic_php_phpcs_args = '--standard=PSR2'
-"let g:syntastic_php_phpmd_exec = '~/.composer/vendor/bin/phpmd'
-"let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
-
-"let g:syntastic_html_tidy_ignore_errors = ['<input> proprietary attribute "role"']
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-"let g:syntastic_html_tidy_blocklevel_tags = []
-"let g:syntastic_html_tidy_inline_tags = []
-"let g:syntastic_html_tidy_empty_tags = []
-
-"}}}
-
-" === Plugin '2072/PHP-Indenting-for-VIm' ==={{{
 
 let g:PHP_vintage_case_default_indent = 1
 let g:PHP_removeCRwhenUnix = 1
@@ -298,37 +165,25 @@ let php_sql_query = 0
 let php_htmlInStrings = 0
 let php_baselib = 0
 
-"}}}
-
-" ===  Plugin: 'mileszs/ack.vim' ==={{{
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-"}}}
-
-" === Plugin: 'vim-syntastic/syntastic' ==={{{
 
 let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_args = '--standard=psr2'
+let g:syntastic_php_phpcs_args = '--standard=PSR2'
 let g:syntastic_php_phpcs_exec = '~/vendor/bin/phpcs'
 let g:syntastic_php_phpmd_exec = '~/vendor/bin/phpmd'
 let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
-
+let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_sass_checkers = ["sasslint"]
 
-"}}}
-
-" === Plugin 'tpope/vim-commentary' ==={{{
 
 autocmd FileType php setlocal commentstring=//\ %s
 autocmd FileType cmake setlocal commentstring=#\ %s
 autocmd FileType cpp setlocal commentstring=//\ %s
 
-"}}}
-
-" === Plugin 'junegunn/vim-easy-align' ==={{{
 
 "Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -336,37 +191,15 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"}}}
-
-" === Plugin: 'tpope/vim-commentary' ==={{{
 
 autocmd FileType php setlocal commentstring=//\ %s
 
-"}}}
-
-" === Plugin 'tpope/vim-vinegar' 'netrw' ==={{{
 
 let g:netrw_altfile = 1
 let g:netrw_list_hide = '.*\.pyc'
 
-"}}}
-
-" === Plugin 'plytophogy/vim-virtualenv' ==={{{
 
 let g:virtualenv_directory = $HOME."/python-virtualenv"
 
-"}}}
 
-" === Plugin  'tpope/vim-abolish' === {{{
-
-" see: vim/after/plugin/abolish.vim
-
-"}}}
-
-augroup quickfix
-    autocmd!
-    autocmd FileType qf setlocal wrap
-augroup END
-
-nnoremap <leader>cd :cd %:p:h<cr>
 "finish

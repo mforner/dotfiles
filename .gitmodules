@@ -1,0 +1,75 @@
+[submodule "vim/pack/colors/start/vim-vividchalk"]
+	path = vim/pack/colors/start/vim-vividchalk
+	url = https://github.com/tpope/vim-vividchalk
+[submodule "vim/pack/colors/start/landscape.vim"]
+	path = vim/pack/colors/start/landscape.vim
+	url = https://github.com/itchyny/landscape.vim
+[submodule "vim/pack/plugins/start/vim-sensible"]
+	path = vim/pack/plugins/start/vim-sensible
+	url = https://github.com/tpope/vim-sensible
+[submodule "vim/pack/colors/start/gruvbox"]
+	path = vim/pack/colors/start/gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule "vim/pack/plugins/start/vim-surround"]
+	path = vim/pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim/pack/plugins/start/vim-repeat"]
+	path = vim/pack/plugins/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "vim/pack/plugins/start/vim-unimpaired"]
+	path = vim/pack/plugins/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired
+[submodule "vim/pack/plugins/start/vim-commentary"]
+	path = vim/pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "vim/pack/plugins/start/vim-eunuch"]
+	path = vim/pack/plugins/start/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch
+[submodule "vim/pack/plugins/start/vim-abolish"]
+	path = vim/pack/plugins/start/vim-abolish
+	url = https://github.com/tpope/vim-abolish
+[submodule "vim/pack/plugins/start/vim-dispatch"]
+	path = vim/pack/plugins/start/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch
+[submodule "vim/pack/plugins/start/vim-projectionist"]
+	path = vim/pack/plugins/start/vim-projectionist
+	url = https://github.com/tpope/vim-projectionist
+[submodule "vim/pack/plugins/start/vim-vinegar"]
+	path = vim/pack/plugins/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
+[submodule "vim/pack/plugins/start/vim-sleuth"]
+	path = vim/pack/plugins/start/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth
+[submodule "vim/pack/plugins/start/vim-virtualenv"]
+	path = vim/pack/plugins/start/vim-virtualenv
+	url = https://github.com/plytophogy/vim-virtualenv
+[submodule "vim/pack/plugins/start/lightline.vim"]
+	path = vim/pack/plugins/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule "vim/pack/plugins/start/ack.vim"]
+	path = vim/pack/plugins/start/ack.vim
+	url = https://github.com/mileszs/ack.vim
+[submodule "vim/pack/plugins/start/vim-easy-align"]
+	path = vim/pack/plugins/start/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "vim/pack/plugins/start/syntastic"]
+	path = vim/pack/plugins/start/syntastic
+	url = https://github.com/vim-syntastic/syntastic
+[submodule "vim/pack/syntax/start/PHP-Indenting-for-VIm"]
+	path = vim/pack/syntax/start/PHP-Indenting-for-VIm
+	url = https://github.com/2072/PHP-Indenting-for-VIm
+[submodule "vim/pack/syntax/start/vim-syntax-for-PHP"]
+	path = vim/pack/syntax/start/vim-syntax-for-PHP
+	url = https://github.com/2072/vim-syntax-for-PHP
+[submodule "vim/pack/syntax/start/vim-dts-indent"]
+	path = vim/pack/syntax/start/vim-dts-indent
+	url = https://github.com/jyelloz/vim-dts-indent
+[submodule "vim/pack/syntax/start/vim-systemd-syntax"]
+	path = vim/pack/syntax/start/vim-systemd-syntax
+	url = https://github.com/Matt-Deacalion/vim-systemd-syntax
+[submodule "vim/pack/syntax/start/octave.vim"]
+	path = vim/pack/syntax/start/octave.vim
+	url = https://github.com/tranvansang/octave.vim
+[submodule "vim/pack/syntax/start/vim-js"]
+	path = vim/pack/syntax/start/vim-js
+	url = https://github.com/yuezk/vim-js
