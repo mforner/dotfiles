@@ -126,7 +126,7 @@ set makeprg=""
 
 nnoremap <F6> :Make<CR>
 
-nnoremap <F5> :!/home/mario/projekte/unity-a2/be4trade/install.sh<CR>
+nnoremap <F5> :!$HOME/bin/install.sh<CR>
 
 if has("patch-8.1.0360")
     set diffopt+=internal,algorithm:patience
