@@ -201,5 +201,8 @@ let g:netrw_list_hide = '.*\.pyc'
 
 let g:virtualenv_directory = $HOME."/python-environment"
 
+let g:changelog_spacing_errors = 0
+
+autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
 "finish
