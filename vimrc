@@ -180,19 +180,12 @@ let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute " ,"trimming 
 let g:syntastic_sass_checkers = ["sasslint"]
 
 
-autocmd FileType php setlocal commentstring=//\ %s
-autocmd FileType cmake setlocal commentstring=#\ %s
-autocmd FileType cpp setlocal commentstring=//\ %s
-
 
 "Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-
-autocmd FileType php setlocal commentstring=//\ %s
 
 
 let g:netrw_altfile = 1
@@ -204,5 +197,6 @@ let g:virtualenv_directory = $HOME."/python-environment"
 let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
+
 
 "finish
