@@ -194,6 +194,11 @@ let g:netrw_list_hide = '.*\.pyc'
 
 let g:virtualenv_directory = $HOME."/python-environment"
 
+if !empty($FULLNAME) && !empty($EMAIL)
+  let g:changelog_username = printf("%s <%s>", $FULLNAME, $EMAIL)
+endif
+let g:changelog_new_date_format = "%d  %u\n\n    *%c"
+let g:changelog_new_entry_format = "    *%c"
 let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
