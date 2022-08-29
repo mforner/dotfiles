@@ -28,7 +28,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 """ 's'ource 'v'imrc
 nmap <leader>sv :source $MYVIMRC<cr>
 
-colorscheme gruvbox
+colorscheme dracula
 
 set bg=dark
 
