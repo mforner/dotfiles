@@ -109,3 +109,6 @@
 [submodule ".vim/pack/plugins/start/vim-clang-format"]
 	path = .vim/pack/plugins/start/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
+[submodule ".vim/pack/plugins/start/vimwiki"]
+	path = .vim/pack/plugins/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki
