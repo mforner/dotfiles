@@ -79,9 +79,6 @@
 [submodule ".vim/pack/plugins/start/dracula"]
 	path = .vim/pack/plugins/start/dracula
 	url = https://github.com/dracula/vim.git
-[submodule ".vim/pack/plugins/start/emmet-vim"]
-	path = .vim/pack/plugins/start/emmet-vim
-	url = https://github.com/mattn/emmet-vim
 [submodule ".vim/pack/plugins/start/vim-syntax-for-PHP"]
 	path = .vim/pack/plugins/start/vim-syntax-for-PHP
 	url = https://github.com/2072/vim-syntax-for-PHP
