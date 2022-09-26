@@ -1,14 +1,14 @@
-[submodule "vim/pack/colors/start/vim-vividchalk"]
-	path = .vim/pack/colors/start/vim-vividchalk
+[submodule "vim/pack/plugins/start/vim-vividchalk"]
+	path = .vim/pack/plugins/start/vim-vividchalk
 	url = https://github.com/tpope/vim-vividchalk
-[submodule "vim/pack/colors/start/landscape.vim"]
-	path = .vim/pack/colors/start/landscape.vim
+[submodule "vim/pack/plugins/start/landscape.vim"]
+	path = .vim/pack/plugins/start/landscape.vim
 	url = https://github.com/itchyny/landscape.vim
 [submodule "vim/pack/plugins/start/vim-sensible"]
 	path = .vim/pack/plugins/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible
-[submodule "vim/pack/colors/start/gruvbox"]
-	path = .vim/pack/colors/start/gruvbox
+[submodule "vim/pack/plugins/start/gruvbox"]
+	path = .vim/pack/plugins/start/gruvbox
 	url = https://github.com/morhetz/gruvbox
 [submodule "vim/pack/plugins/start/vim-surround"]
 	path = .vim/pack/plugins/start/vim-surround
@@ -55,27 +55,30 @@
 [submodule "vim/pack/plugins/start/syntastic"]
 	path = .vim/pack/plugins/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic
-[submodule "vim/pack/syntax/start/PHP-Indenting-for-VIm"]
-	path = .vim/pack/syntax/start/PHP-Indenting-for-VIm
+[submodule "vim/pack/plugins/start/PHP-Indenting-for-VIm"]
+	path = .vim/pack/plugins/start/PHP-Indenting-for-VIm
 	url = https://github.com/2072/PHP-Indenting-for-VIm
-[submodule "vim/pack/syntax/start/vim-syntax-for-PHP"]
-	path = .vim/pack/syntax/start/vim-syntax-for-PHP
+[submodule "vim/pack/plugins/start/vim-syntax-for-PHP"]
+	path = .vim/pack/plugins/start/vim-syntax-for-PHP
 	url = https://github.com/2072/vim-syntax-for-PHP
-[submodule "vim/pack/syntax/start/vim-dts-indent"]
-	path = .vim/pack/syntax/start/vim-dts-indent
+[submodule "vim/pack/plugins/start/vim-dts-indent"]
+	path = .vim/pack/plugins/start/vim-dts-indent
 	url = https://github.com/jyelloz/vim-dts-indent
-[submodule "vim/pack/syntax/start/vim-systemd-syntax"]
-	path = .vim/pack/syntax/start/vim-systemd-syntax
+[submodule "vim/pack/plugins/start/vim-systemd-syntax"]
+	path = .vim/pack/plugins/start/vim-systemd-syntax
 	url = https://github.com/Matt-Deacalion/vim-systemd-syntax
-[submodule "vim/pack/syntax/start/octave.vim"]
-	path = .vim/pack/syntax/start/octave.vim
+[submodule "vim/pack/plugins/start/octave.vim"]
+	path = .vim/pack/plugins/start/octave.vim
 	url = https://github.com/tranvansang/octave.vim
-[submodule "vim/pack/syntax/start/vim-js"]
-	path = .vim/pack/syntax/start/vim-js
+[submodule "vim/pack/plugins/start/vim-js"]
+	path = .vim/pack/plugins/start/vim-js
 	url = https://github.com/yuezk/vim-js
-[submodule "vim/pack/syntax/start/vim-clang-format"]
-	path = .vim/pack/syntax/start/vim-clang-format
+[submodule "vim/pack/plugins/start/vim-clang-format"]
+	path = .vim/pack/plugins/start/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
-[submodule ".vim/pack/colors/start/dracula"]
+[submodule ".vim/pack/plugins/start/dracula"]
 	path = .vim/pack/colors/start/dracula
 	url = https://github.com/dracula/vim.git
+[submodule ".vim/pack/plugins/start/emmet-vim"]
+	path = .vim/pack/plugins/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim
