@@ -77,7 +77,7 @@
 	path = .vim/pack/plugins/start/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
 [submodule ".vim/pack/plugins/start/dracula"]
-	path = .vim/pack/colors/start/dracula
+	path = .vim/pack/plugins/start/dracula
 	url = https://github.com/dracula/vim.git
 [submodule ".vim/pack/plugins/start/emmet-vim"]
 	path = .vim/pack/plugins/start/emmet-vim
