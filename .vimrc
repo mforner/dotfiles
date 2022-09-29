@@ -95,7 +95,7 @@ set timeoutlen=700
 set path+=**
 
 """ fold section with from {{{ until }}}
-set foldmethod=marker
+set foldmethod=manual
 
 """ make trailing spaces and tabls visible
 set list
@@ -203,5 +203,9 @@ let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
+let wiki = {}
+let wiki.path = '~/vimwiki/'
+let wiki.nested_syntaxes = {'xml': 'xml'}
+let g:vimwiki_list = [wiki]
 
 "finish
