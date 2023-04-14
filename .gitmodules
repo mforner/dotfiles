@@ -115,9 +115,6 @@
 [submodule ".vim/pack/plugins/start/vim-dadbod"]
 	path = .vim/pack/plugins/start/vim-dadbod
 	url = https://github.com/tpope/vim-dadbod
-[submodule ".vim/pack/plugins/start/copilot"]
-	path = .vim/pack/plugins/start/copilot
-	url = https://github.com/github/copilot.vim
 [submodule ".vim/pack/plugins/start/vim-autopep8"]
 	path = .vim/pack/plugins/start/vim-autopep8
 	url = https://github.com/tell-k/vim-autopep8
