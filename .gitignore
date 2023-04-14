@@ -9,6 +9,6 @@ Session.vim
 .netrwhist
 *~
 #vim/pack
-vim/.netrwbook
-vim/undo
-vim/spell
+.vim/.netrwbook
+.vim/undo
+.vim/spell
