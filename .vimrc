@@ -180,6 +180,7 @@ let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute " ,"trimming 
 let g:syntastic_sass_checkers = ["sasslint"]
 
 
+let g:syntastic_cpp_include_dirs = ['/home/mario/projekte/ssclib']
 
 "Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -189,7 +190,7 @@ nmap ga <Plug>(EasyAlign)
 
 
 let g:netrw_altfile = 1
-let g:netrw_list_hide = '.*\.pyc'
+let g:netrw_list_hide = '.*\.swp$,.*\.pyc$'
 
 
 let g:virtualenv_directory = $HOME."/python-environment"
@@ -205,7 +206,9 @@ autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
 let wiki = {}
 let wiki.path = '~/vimwiki/'
-let wiki.nested_syntaxes = {'xml': 'xml'}
+let wiki.nested_syntaxes = {'xml': 'xml', 'sql': 'sql'}
 let g:vimwiki_list = [wiki]
+
+let g:autopep8_indent_size=2
 
 "finish
