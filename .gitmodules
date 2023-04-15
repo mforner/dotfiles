@@ -118,3 +118,9 @@
 [submodule ".vim/pack/plugins/start/vim-autopep8"]
 	path = .vim/pack/plugins/start/vim-autopep8
 	url = https://github.com/tell-k/vim-autopep8
+[submodule ".vim/pack/plugins/start/fzf.vim"]
+	path = .vim/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule ".vim/pack/plugins/start/tagbar"]
+	path = .vim/pack/plugins/start/tagbar
+	url = https://github.com/preservim/tagbar
