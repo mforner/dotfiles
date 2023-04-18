@@ -204,11 +204,6 @@ let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
-let wiki = {}
-let wiki.path = '~/vimwiki/'
-let wiki.nested_syntaxes = {'xml': 'xml', 'sql': 'sql'}
-let g:vimwiki_list = [wiki]
-
 let g:autopep8_indent_size=2
 
 nmap <F8> :TagbarToggle<CR>

@@ -109,9 +109,6 @@
 [submodule ".vim/pack/plugins/start/vim-clang-format"]
 	path = .vim/pack/plugins/start/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
-[submodule ".vim/pack/plugins/start/vimwiki"]
-	path = .vim/pack/plugins/start/vimwiki
-	url = https://github.com/vimwiki/vimwiki
 [submodule ".vim/pack/plugins/start/vim-dadbod"]
 	path = .vim/pack/plugins/start/vim-dadbod
 	url = https://github.com/tpope/vim-dadbod
