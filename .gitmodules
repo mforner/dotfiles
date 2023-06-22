@@ -127,3 +127,6 @@
 [submodule ".vim/pack/plugins/start/vim-jinja"]
 	path = .vim/pack/plugins/start/vim-jinja
 	url = https://github.com/lepture/vim-jinja
+[submodule ".vim/pack/plugins/start/copilot.vim"]
+	path = .vim/pack/plugins/start/copilot.vim
+	url = https://github.com/github/copilot.vim
