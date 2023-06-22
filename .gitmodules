@@ -124,3 +124,6 @@
 [submodule ".vim/pack/plugins/start/vimwiki"]
 	path = .vim/pack/plugins/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki
+[submodule ".vim/pack/plugins/start/copilot.vim"]
+	path = .vim/pack/plugins/start/copilot.vim
+	url = https://github.com/github/copilot.vim
