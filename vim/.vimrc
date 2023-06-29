@@ -209,7 +209,7 @@ let g:autopep8_indent_size=2
 nmap <F8> :TagbarToggle<CR>
 
 autocmd BufReadPre *
- \ let size = getfize(expand("<afile>"))
+ \ let size = getfsize(expand("<afile>"))
  \ | if size > 100000 || size == -2
  \ |   let b:copilot_enabled = v:false
  \ | endif
