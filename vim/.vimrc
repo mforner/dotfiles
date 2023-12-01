@@ -134,6 +134,7 @@ endif
 
 " see: vim/after/plugin/abolish.vim
 
+let g:vimwiki_key_mappings = { 'headers': 0 }
 
 augroup quickfix
     autocmd!
@@ -203,8 +204,6 @@ let g:changelog_new_entry_format = "    *%c"
 let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
-
-let g:autopep8_indent_size=2
 
 nmap <F8> :TagbarToggle<CR>
 
