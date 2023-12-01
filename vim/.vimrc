@@ -86,6 +86,8 @@ set visualbell
 """ hide mousem when typing until moved again
 set mousehide
 
+set mouse=nvicrv
+
 """ timout for pending operator in ms
 set timeoutlen=700
 
@@ -212,5 +214,6 @@ autocmd BufReadPre *
  \ | if size > 100000 || size == -2
  \ |   let b:copilot_enabled = v:false
  \ | endif
+
 
 "finish
