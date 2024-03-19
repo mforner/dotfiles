@@ -138,6 +138,8 @@ endif
 
 let g:vimwiki_key_mappings = { 'headers': 0 }
 
+let g:vimwiki_global_ext = 0
+
 augroup quickfix
     autocmd!
     autocmd FileType qf setlocal wrap
