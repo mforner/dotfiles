@@ -217,5 +217,6 @@ autocmd BufReadPre *
  \ |   let b:copilot_enabled = v:false
  \ | endif
 
+inoremap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 
 "finish
