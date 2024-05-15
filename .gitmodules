@@ -102,10 +102,6 @@
 	path = vim/.vim/pack/plugins/start/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
 	ignore = dirty
-[submodule "vim/.vim/pack/plugins/start/copilot.vim"]
-	path = vim/.vim/pack/plugins/start/copilot.vim
-	url = https://github.com/github/copilot.vim
-	ignore = dirty
 [submodule "vim/.vim/pack/plugins/start/dracula"]
 	path = vim/.vim/pack/plugins/start/dracula
 	url = https://github.com/dracula/vim

@@ -211,12 +211,4 @@ autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
 nmap <F8> :TagbarToggle<CR>
 
-autocmd BufReadPre *
- \ let size = getfsize(expand("<afile>"))
- \ | if size > 100000 || size == -2
- \ |   let b:copilot_enabled = v:false
- \ | endif
-
-inoremap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-
 "finish
