@@ -162,11 +162,6 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-
-let g:PHP_vintage_case_default_indent = 1
-let g:PHP_removeCRwhenUnix = 1
-let g:PHP_autoformatcomment = 0
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
