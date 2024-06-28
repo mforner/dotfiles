@@ -78,10 +78,6 @@
 	path = vim/.vim/pack/plugins/start/PHP-Indenting-for-VIm
 	url = https://github.com/2072/PHP-Indenting-for-VIm
 	ignore = dirty
-[submodule "vim/.vim/pack/plugins/start/vim-syntax-for-PHP"]
-	path = vim/.vim/pack/plugins/start/vim-syntax-for-PHP
-	url = https://github.com/2072/vim-syntax-for-PHP
-	ignore = dirty
 [submodule "vim/.vim/pack/plugins/start/vim-dts-indent"]
 	path = vim/.vim/pack/plugins/start/vim-dts-indent
 	url = https://github.com/jyelloz/vim-dts-indent

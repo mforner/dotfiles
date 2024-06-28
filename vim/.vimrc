@@ -166,10 +166,6 @@ endif
 let g:PHP_vintage_case_default_indent = 1
 let g:PHP_removeCRwhenUnix = 1
 let g:PHP_autoformatcomment = 0
-let php_sql_query = 0
-let php_htmlInStrings = 0
-let php_baselib = 0
-
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
