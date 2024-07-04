@@ -134,12 +134,6 @@ if has("patch-8.1.0360")
     set diffopt+=internal,algorithm:patience
 endif
 
-" see: vim/after/plugin/abolish.vim
-
-let g:vimwiki_key_mappings = { 'headers': 0 }
-
-let g:vimwiki_global_ext = 0
-
 augroup quickfix
     autocmd!
     autocmd FileType qf setlocal wrap

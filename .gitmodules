@@ -78,9 +78,6 @@
 	path = vim/.vim/pack/plugins/start/dracula
 	url = https://github.com/dracula/vim
 	ignore = dirty
-[submodule "vim/.vim/pack/plugins/start/vimwiki"]
-	path = vim/.vim/pack/plugins/start/vimwiki
-	url = https://github.com/vimwiki/vimwiki
 [submodule "vim/.vim/pack/plugins/start/vim-autopep8"]
 	path = vim/.vim/pack/plugins/start/vim-autopep8
 	url = https://github.com/tell-k/vim-autopep8
