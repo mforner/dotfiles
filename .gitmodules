@@ -78,3 +78,7 @@
 	path = vim/.vim/pack/plugins/start/vim-autopep8
 	url = https://github.com/tell-k/vim-autopep8
 	ignore = dirty
+[submodule "vim/.vim/pack/plugins/start/vim-copilot"]
+	path = vim/.vim/pack/plugins/start/vim-copilot
+	url = https://github.com/github/copilot.vim.git
+	ignore = dirty
