@@ -2,6 +2,32 @@ if &compatible
   set nocompatible
 endif
 
+call plug#begin()
+
+Plug 'dracula/vim'
+Plug 'github/copilot.vim.git'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'jyelloz/vim-dts-indent'
+Plug 'mileszs/ack.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'tell-k/vim-autopep8'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-syntastic/syntastic'
+Plug 'yuezk/vim-js'
+
+call plug#end()
+
 """ configure how to show whitespace override sensible.vim here
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:+
 
