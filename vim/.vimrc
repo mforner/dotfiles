@@ -54,8 +54,6 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 """ 's'ource 'v'imrc
 nmap <leader>sv :source $MYVIMRC<cr>
 
-colorscheme dracula
-
 set bg=dark
 
 """ configureation for gui
@@ -65,9 +63,6 @@ endif
 
 """ allow buffers to go to background w/out saving etc.
 set hidden
-
-""" write as using sudo
-command! W w !sudo tee % > /dev/null
 
 """ TAB Completion : 1st longest fit, 2nd list, 3rd cycle
 set wildmode=longest,list,full
@@ -146,19 +141,10 @@ set undolevels=1000
 """ number of lines to save for undo
 set undoreload=10000
 
-""" ignore whitespace only differences
-" set diffopt+=iwhite
-
 """ configure make program
 set makeprg=""
 
-nnoremap <F6> :Make<CR>
-
 nnoremap <F5> :!$HOME/bin/install.sh<CR>
-
-if has("patch-8.1.0360")
-    set diffopt+=internal,algorithm:patience
-endif
 
 augroup quickfix
     autocmd!
@@ -167,49 +153,8 @@ augroup END
 
 nnoremap <leader>cd :cd %:p:h<cr>
 
-""" Plugin configuration
-
-""" search .clang-format or _clang-format yaml configuration
-
-let g:clang_format#detect_style_file = 1
-
-let g:autopep8_max_line_length = 80
-let g:autopep8_indent_size = 2
-let g:autopep8_disable_show_diff = 1
-
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-
-let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_args = '--standard=PSR2'
-let g:syntastic_php_phpcs_exec = '~/vendor/bin/phpcs'
-let g:syntastic_php_phpmd_exec = '~/vendor/bin/phpmd'
-let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
-let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-let g:syntastic_sass_checkers = ["sasslint"]
-
-
-let g:syntastic_cpp_include_dirs = ['/home/mario/projekte/ssclib']
-
-"Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-"Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-
 let g:netrw_altfile = 1
 let g:netrw_list_hide = '.*\.swp$,.*\.pyc$'
-
-
-let g:virtualenv_directory = $HOME."/python-environment"
 
 if !empty($FULLNAME) && !empty($EMAIL)
   let g:changelog_username = printf("%s <%s>", $FULLNAME, $EMAIL)
@@ -220,6 +165,37 @@ let g:changelog_spacing_errors = 0
 
 autocmd BufNewFile,BufRead CHANGELOG set filetype=changelog
 
-nmap <F8> :TagbarToggle<CR>
+""" Plugin configuration
+
+""" search .clang-format or _clang-format yaml configuration
+let g:clang_format#detect_style_file = 1
+
+let g:autopep8_max_line_length = 80
+let g:autopep8_indent_size = 2
+let g:autopep8_disable_show_diff = 1
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+let g:syntastic_php_checkers = ['php', 'phpcs']
+let g:syntastic_php_phpcs_args = '--standard=PSR2'
+let g:syntastic_php_phpcs_exec = '~/vendor/bin/phpcs'
+let g:syntastic_php_phpmd_exec = '~/vendor/bin/phpmd'
+let g:syntastic_php_phpmd_post_args = 'cleancode,codesize,controversial,design,unusedcode'
+let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+let g:syntastic_sass_checkers = ["sasslint"]
+
+let g:syntastic_cpp_include_dirs = ['/home/mario/projekte/ssclib']
+
+""" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+""" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+nnoremap <F6> :Make<CR>
+
+colorscheme dracula
 
 "finish
