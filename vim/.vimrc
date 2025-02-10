@@ -5,7 +5,6 @@ endif
 call plug#begin()
 
 Plug 'dracula/vim'
-Plug 'github/copilot.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jyelloz/vim-dts-indent'
