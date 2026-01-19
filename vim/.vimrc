@@ -4,7 +4,6 @@ endif
 
 call plug#begin()
 
-Plug 'dracula/vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jyelloz/vim-dts-indent'
@@ -24,6 +23,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-syntastic/syntastic'
 Plug 'yuezk/vim-js'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -56,9 +56,7 @@ nmap <leader>sv :source $MYVIMRC<cr>
 set bg=dark
 
 """ configureation for gui
-if has("gui_running")
-  set background=dark
-endif
+set background=dark
 
 """ allow buffers to go to background w/out saving etc.
 set hidden
@@ -195,6 +193,6 @@ nmap ga <Plug>(EasyAlign)
 
 nnoremap <F6> :Make<CR>
 
-colorscheme dracula
+colorscheme PaperColor
 
 "finish
