@@ -195,4 +195,6 @@ nnoremap <F6> :Make<CR>
 
 colorscheme PaperColor
 
+let g:lightline = {'colorscheme': 'PaperColor' }
+
 "finish
